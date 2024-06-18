@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {memo} from 'react';
 
 const Product = ({ product }) => {
     return (
-        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
-                <img className="rounded-t-lg" src={product.image || "/docs/images/blog/image-1.jpg"} alt={product.name} />
+                <img className="rounded-t-lg" src={product.image} alt={product.name} />
             </a>
             <div className="p-5">
                 <a href="#">
