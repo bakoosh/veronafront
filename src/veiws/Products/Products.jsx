@@ -3,12 +3,14 @@ import axios from 'axios';
 import Product from "../../components/Product";
 import {useChain} from "react-spring";
 import {SearchContext} from "../../contexts/SearchContext";
+import Loader from "../../components/Loader";
 
 
 
 const Products = () => {
     const [products, setProducts] = useState([]);
     const [catalogs, setCatalogs] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -22,11 +24,12 @@ const Products = () => {
                 page: currentPage,
                 perPage: perPage
             }
-        }) //Loader !!! Слишком большая загрузка
+        })
             .then((response) => {
-                console.log('API Response:', response.data); // Log API response
+                console.log('API Response:', response.data);
                 if (response.data && Array.isArray(response.data.products)) {
                     setProducts(response.data.products);
+                    setLoading(false)
                     setTotalPages(response.data.last_page);
                 } else {
                     console.error('Unexpected response format:', response.data);
@@ -36,7 +39,7 @@ const Products = () => {
                 console.error('There was an error fetching the products', error);
             });
     }, []);
-    console.log(products)
+
     useEffect(() => {
         axios.get("https://back.almaray.kz/api/catalogs").then((response) => {
             setCatalogs(response.data.catalogs);
@@ -52,9 +55,12 @@ const Products = () => {
     );
 
     return (
-        <div className={"flex"}>
+        loading ? Loader : <div className={"flex"}>
             <div className={"w-1/3 mt-3.5"}>
-                <p className={"text-black text-lg font-bold "}>Все украшения</p>
+                <div className={"flex items-center border-b-4 border-black"}>
+                    <p className={"text-black text-lg font-medium"}>Все украшения</p>
+                </div>
+
 
                 <div className={"flex flex-col"}>
                     <div className={"w-full p-4 ml-4"}>
@@ -94,6 +100,6 @@ const Products = () => {
         </div>
 
     );
-}   ;
+};
 
 export default Products;
