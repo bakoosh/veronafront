@@ -45,14 +45,8 @@ const Products = () => {
 
     return (
         loading ? <Loader /> : (
-            <div className="flex">
-                <aside className="w-64 border-r h-screen">
-                    <section>
-                        <p className="font-bold border-gray-700 border-b-3">Все украшения</p>
-                    </section>
-                </aside>
-
-                <div className="grid grid-cols-3 gap-4">
+            <div className="w-full flex items-center justify-center">
+                <div className="w-4/5 grid grid-cols-3 gap-4">
                     {filteredProducts.map(product => (
                         <Product key={product.id} product={product} />
                     ))}

@@ -1,21 +1,46 @@
 import React, {useState} from 'react';
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
 
     const [phone, setPhone] = React.useState('');
-    const [verifyCode, setVerifyCode] = React.useState();
-    const [sended , setSended] = useState(false);
-    console.log(phone)
-    const handleClick = () => {
-        const verify = axios.post('http://127.0.0.1:8000/api/verify', {
-            phone: phone
-        })
-        if (!verify.error) {
-            setSended(!sended);
-        }
+    const [verifyCode, setVerifyCode] = React.useState('');
 
+
+    const [sended , setSended] = useState(false); //не забыть поменят
+
+    const navigate = useNavigate()
+
+
+    const handleClick = async () => {
+        if (phone.length < 0) {
+            return false
+        }
+        const response = await axios.post('http://127.0.0.1:8000/api/verify', {phone: phone})
+        if (response) {
+            setSended(true);
+            setVerifyCode('');
+        }
+        else {
+            throw new Error()
+        }
     }
+
+
+    const handleCodeVerifyClick = async () => {
+        const response = await axios.post('http://127.0.0.1:8000/api/login', {phone: phone , code: verifyCode})
+        if (response.data) {
+            localStorage.setItem('user', JSON.stringify(response.data));
+            navigate('/');
+        }
+    }
+
+
+
+
+
+
     return (
         <div className={"w-full h-96 flex items-center justify-center"}>
             <div className={"w-4/5 flex"}>
@@ -26,11 +51,10 @@ const Login = () => {
                         </div>
 
 
-                        <input pattern="[0-9]{10}"
+                        <input
                                className={"border-black px-8 py-3 rounded-lg border-2 text-black focus:outline-none text-lg mt-2"}
                                value={phone}
                                onChange={(e) => setPhone(e.target.value)}
-                               required
                         />
 
                         <button
@@ -60,6 +84,7 @@ const Login = () => {
                         />
 
                         <button
+                            onClick={handleCodeVerifyClick}
                             className={"px-10 py-3 text-lg text-gray-600 font-bold bg-gray-300 rounded-lg mt-2 "}>Отправить
                             код
                         </button>

@@ -7,13 +7,10 @@ import SearchProvider from "./contexts/SearchContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <SearchProvider>
-        <BrowserRouter>
-            <StrictMode>
-                <App />
-            </StrictMode>
-        </BrowserRouter>
-    </SearchProvider>
-
-);
+        <SearchProvider>
+            <BrowserRouter>
+                    <App />
+            </BrowserRouter>
+        </SearchProvider>
+    );
 

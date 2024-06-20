@@ -11,7 +11,8 @@ import Login from "./veiws/Login/Login";
 
 function App() {
     const {searchValue} = useContext(SearchContext)
-    console.log(searchValue)
+    const user = localStorage.getItem("user");
+    console.log(user)
 
   return (
     <div className="App">
