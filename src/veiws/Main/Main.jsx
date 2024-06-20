@@ -3,18 +3,13 @@ import React from 'react';
 
 const Main = () => {
     return (
-        <div>
-            <div className={"w-full h-screen"}>
-                <div className={"w-full h-1/3 flex items-center justify-center"}>
-                    <p className={"font-medium text-9xl"}>A L M A R A Y</p>
-                </div>
-
-                <div className={"w-full h-2/3 bg-black"}>
-                    <p className={"text-amber-50"}>Фото</p>
+        <div className={"w-full h-screen overflow-hidden"}>
+            <div className={"w-full h-1/3 flex items-center justify-center"}>
+                <div className={"w-2/3"}>
+                    <img src={`${process.env.PUBLIC_URL}/ALMARAY.png`} alt="Описание изображения"
+                         className="mx-auto my-4"/>
                 </div>
             </div>
-
-            <div className={""}></div>
         </div>
     );
 };
