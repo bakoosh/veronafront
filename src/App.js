@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Routes, useLocation} from "react-router-dom";
+import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import Products from "./veiws/Products/Products";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
@@ -7,15 +7,20 @@ import {useContext, useEffect} from "react";
 import Main from "./veiws/Main/Main";
 import Login from "./veiws/Login/Login";
 import {AuthUserContext} from "./contexts/AuthUserContext";
+import Me from "./veiws/Me/Me";
 
 
 function App() {
     const {authUser, setAuthUser} = useContext(AuthUserContext)
     useEffect(() => {
         const user = localStorage.getItem("user")
-        setAuthUser(user)
+        if (user) {
+            setAuthUser(user)
+        }
+        else {
+            setAuthUser(null)
+        }
     }, []);
-    console.log(authUser)
   return (
     <div className="App">
         <Header/>
@@ -24,7 +29,9 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/products" element={<Products/>}/>
-                    <Route path="/login" element={<Login/>}/>
+                    {
+                        authUser ? <Route path={'/me'} element={<Me/>}/> : <Route path="/login" element={<Login />} />
+                    }
                 </Routes>
             </div>
             <Footer/>

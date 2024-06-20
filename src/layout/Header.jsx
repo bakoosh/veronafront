@@ -5,19 +5,21 @@ import { TbLetterA } from "react-icons/tb";
 import { MdShoppingCart } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { BsFillHeartFill } from "react-icons/bs";
+import {AuthUserContext} from "../contexts/AuthUserContext";
 
 
 
 const Header = () => {
     const {setSearchValue} = useContext(SearchContext);
     const navigate = useNavigate()
+    const {authUser} = useContext(AuthUserContext)
     return (
         <header
             className={"w-full flex items-center justify-center"}>
             <div className={'w-4/5 items-center flex border-b py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'}>
 
             <div className={"w-1/6 flex items-center justify-around"}>
-                <div className={"w-10 h-9 flex items-center justify-center bg-gray-500 rounded-lg mr-4 hover:cursor-pointer"} onClick={() => navigate('/')}>
+                <div className={"w-10 h-10 flex items-center justify-center bg-gray-500 rounded-lg mr-4 hover:cursor-pointer"} onClick={() => navigate('/')}>
                     <TbLetterA className={"text-2xl text-amber-50"} />
                 </div>
                 <div className={"flex bg-gray-500 px-5 py-2 rounded-xl text-amber-50 font-bold hover:cursor-pointer"}
@@ -58,7 +60,13 @@ const Header = () => {
                             </svg>
 
                         </li>
-                        <p className={"text-sm hover:cursor-pointer text-gray-400"} onClick={() => navigate('/login')}>Войти</p>
+                        {
+                            authUser ? <p className={"text-sm hover:cursor-pointer text-gray-400"}
+                                          onClick={() => navigate('/me')}>Кабинет</p> :
+                                <p className={"text-sm hover:cursor-pointer text-gray-400"}
+                                   onClick={() => navigate('/login')}>Войти</p>
+
+                        }
                     </div>
                     <div className={"flex flex-col items-center"}>
                         <li className={"flex items-center"}>
