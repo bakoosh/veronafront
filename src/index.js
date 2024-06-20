@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import SearchProvider from "./contexts/SearchContext";
+import AuthProvider from "./contexts/AuthUserContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+    <AuthProvider>
         <SearchProvider>
             <BrowserRouter>
-                    <App />
+                <App />
             </BrowserRouter>
         </SearchProvider>
+    </AuthProvider>
     );
 

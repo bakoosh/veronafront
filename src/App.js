@@ -3,17 +3,19 @@ import {Route, Routes, useLocation} from "react-router-dom";
 import Products from "./veiws/Products/Products";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
-import {useContext} from "react";
-import {SearchContext} from "./contexts/SearchContext";
+import {useContext, useEffect} from "react";
 import Main from "./veiws/Main/Main";
 import Login from "./veiws/Login/Login";
+import {AuthUserContext} from "./contexts/AuthUserContext";
 
 
 function App() {
-    const {searchValue} = useContext(SearchContext)
-    const user = localStorage.getItem("user");
-    console.log(user)
-
+    const {authUser, setAuthUser} = useContext(AuthUserContext)
+    useEffect(() => {
+        const user = localStorage.getItem("user")
+        setAuthUser(user)
+    }, []);
+    console.log(authUser)
   return (
     <div className="App">
         <Header/>
