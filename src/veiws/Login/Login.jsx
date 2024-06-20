@@ -36,11 +36,6 @@ const Login = () => {
         }
     }
 
-
-
-
-
-
     return (
         <div className={"w-full h-96 flex items-center justify-center"}>
             <div className={"w-4/5 flex"}>
