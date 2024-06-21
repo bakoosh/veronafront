@@ -5,15 +5,21 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import SearchProvider from "./contexts/SearchContext";
 import AuthProvider from "./contexts/AuthUserContext";
+import ErrorBoundary from "./config/ErrorBoundary";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <AuthProvider>
-        <SearchProvider>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </SearchProvider>
-    </AuthProvider>
+    <StrictMode>
+        <ErrorBoundary>
+            <AuthProvider>
+                <SearchProvider>
+                    <BrowserRouter>
+                        <App />
+                    </BrowserRouter>
+                </SearchProvider>
+            </AuthProvider>
+        </ErrorBoundary>
+    </StrictMode>
+
     );
 

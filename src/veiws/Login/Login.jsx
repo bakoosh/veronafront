@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {AuthUserContext} from "../../contexts/AuthUserContext";
 
 const Login = () => {
-
+    const {authUser, setAuthUser} = useContext(AuthUserContext)
     const [phone, setPhone] = React.useState('');
     const [verifyCode, setVerifyCode] = React.useState('');
 
@@ -32,6 +33,7 @@ const Login = () => {
         const response = await axios.post('http://127.0.0.1:8000/api/login', {phone: phone , code: verifyCode})
         if (response.data) {
             localStorage.setItem('user', JSON.stringify(response.data));
+            setAuthUser(JSON.parse(localStorage.getItem('user')))
             navigate('/');
         }
     }

@@ -1,22 +1,30 @@
-class ErrorBoundary extends React.Component {
+import React, { Component } from 'react';
+import ErrorPage from "../veiws/ErrorPage/ErrorPage";
+
+class ErrorBoundary extends Component {
     constructor(props) {
         super(props);
         this.state = { hasError: false };
     }
 
     static getDerivedStateFromError(error) {
+        // Update state so the next render will show the fallback UI.
         return { hasError: true };
     }
 
     componentDidCatch(error, errorInfo) {
-        logErrorToMyService(error, errorInfo);
+        // You can also log the error to an error reporting service
+        console.error("Error caught by Error Boundary: ", error, errorInfo);
     }
 
     render() {
         if (this.state.hasError) {
-            return <h1 className={"text-9xl text-black"}>Something went wrong.</h1>;
+            // You can render any custom fallback UI
+            return <ErrorPage/>;
         }
 
         return this.props.children;
     }
 }
+
+export default ErrorBoundary;
