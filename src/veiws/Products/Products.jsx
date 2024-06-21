@@ -36,7 +36,7 @@ const Products = () => {
         product.name.toLowerCase().includes(searchValue.toLowerCase())
     );
 
-    const handlePageChange = (page) => {
+    const handlePageChange  = (page) => {
         setCurrentPage(page);
     };
 

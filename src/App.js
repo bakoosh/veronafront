@@ -8,6 +8,8 @@ import Main from "./veiws/Main/Main";
 import Login from "./veiws/Login/Login";
 import {AuthUserContext} from "./contexts/AuthUserContext";
 import Me from "./veiws/Me/Me";
+import Favourites from "./veiws/Favourites/Favourites";
+import './config/axios-interceptors';
 
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
             <div className={"flex"}>
                 <Routes>
                     <Route path="/" element={<Main/>}/>
+                    <Route path="/favourites" element={<Favourites/>}/>
                     <Route path="/products" element={<Products/>}/>
                     {
                         authUser ? <Route path={'/me'} element={<Me/>}/> : <Route path="/login" element={<Login />} />

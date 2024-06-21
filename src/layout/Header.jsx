@@ -77,7 +77,7 @@ const Header = () => {
                             </svg>
 
                         </li>
-                        <p className={"text-sm hover:cursor-pointer text-gray-400"}>Избранное</p>
+                        <p className={"text-sm hover:cursor-pointer text-gray-400"} onClick={() => navigate('/favourites')}>Избранное</p>
                     </div>
                     <div className={"flex flex-col items-center"}>
                         <li className={"flex items-center "}>
@@ -88,7 +88,7 @@ const Header = () => {
                             </svg>
 
                         </li>
-                        <p className={"text-sm hover:cursor-pointer text-gray-400"} onClick={() => navigate('/')}>Корзина</p>
+                        <p className={"text-sm hover:cursor-pointer text-gray-400"} onClick={() => navigate('/basket')}>Корзина</p>
                     </div>
 
                 </ul>

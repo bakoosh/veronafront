@@ -24,7 +24,7 @@ const Login = () => {
             setVerifyCode('');
         }
         else {
-            throw new Error()
+            throw new Error()   
         }
     }
 
