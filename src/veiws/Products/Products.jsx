@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import Product from "../../components/Product";
+import Product from "./components/Product";
 import { SearchContext } from '../../contexts/SearchContext';
 import Loader from '../../components/Loader';
 

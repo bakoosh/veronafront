@@ -10,6 +10,7 @@ import {AuthUserContext} from "./contexts/AuthUserContext";
 import Me from "./veiws/Me/Me";
 import Favourites from "./veiws/Favourites/Favourites";
 import './config/axios-interceptors';
+import PrivateRoute from "./config/PrivateRoute";
 
 
 function App() {
@@ -30,8 +31,15 @@ function App() {
             <div className={"flex"}>
                 <Routes>
                     <Route path="/" element={<Main/>}/>
-                    <Route path="/favourites" element={<Favourites/>}/>
                     <Route path="/products" element={<Products/>}/>
+                    <Route
+                        path="/favourites"
+                        element={
+                            <PrivateRoute authUser={authUser}>
+                                <Favourites />
+                            </PrivateRoute>
+                        }
+                    />
                     {
                         authUser ? <Route path={'/me'} element={<Me/>}/> : <Route path="/login" element={<Login />} />
                     }

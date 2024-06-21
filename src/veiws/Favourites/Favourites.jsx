@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import axios from "axios";
-import Product from "../../components/Product";
+import Product from "../Products/components/Product";
 import { SearchContext } from "../../contexts/SearchContext";
 
 const Favourites = () => {
