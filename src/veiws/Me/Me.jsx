@@ -12,8 +12,8 @@ const Me = () => {
     }
     return (
         <div className={"w-full h-screen"}>
-            <button className={"py-3 px-3 border-black border-2"
-            } onClick={handleLogout}>Выйти</button>
+            {/*<button className={"py-3 px-3 border-black border-2"*/}
+            {/*} onClick={handleLogout}>Выйти</button>*/}
             <div className={"w-full h-5/6 flex items-center justify-center"}>
                 <p className={"text-black font-bold text-3xl"}>                Добро пожаловать {authUser.phone}
                 </p>

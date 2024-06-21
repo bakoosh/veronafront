@@ -2,9 +2,9 @@
     import Modal from 'react-modal';
     import { useSpring, animated } from 'react-spring';
 
-    Modal.setAppElement('#root'); // Это необходимо для обеспечения доступности
+    Modal.setAppElement('#root');
 
-    const BasicModal = ({ isOpen, onRequestClose, Component, componentProps }) => {
+    const ModalComponent = ({ isOpen, onRequestClose, Component, componentProps }) => {
 
         const customStyles   = {
             content: {
@@ -36,4 +36,4 @@
         );
     };
 
-    export default BasicModal;
+    export default ModalComponent;

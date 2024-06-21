@@ -7,7 +7,7 @@ const Login = () => {
     const {authUser, setAuthUser} = useContext(AuthUserContext)
     const [phone, setPhone] = React.useState('');
     const [verifyCode, setVerifyCode] = React.useState('');
-
+    const [disabled, setDisabled] = React.useState(false);
 
     const [sended , setSended] = useState(false); //не забыть поменят
 
@@ -31,10 +31,12 @@ const Login = () => {
 
     const handleCodeVerifyClick = async () => {
         const response = await axios.post('http://127.0.0.1:8000/api/login', {phone: phone , code: verifyCode})
+        setDisabled(true)
         if (response.data) {
             localStorage.setItem('user', JSON.stringify(response.data));
             setAuthUser(JSON.parse(localStorage.getItem('user')))
             navigate('/');
+            setDisabled(false)
         }
     }
 
@@ -55,8 +57,9 @@ const Login = () => {
                         />
 
                         <button
+                            disabled={disabled}
                             onClick={handleClick}
-                            className={"px-10 py-3 text-lg text-gray-600 font-bold bg-gray-300 rounded-lg mt-2 "}>Получить
+                            className={"px-10 py-3 text-lg text-gray-600 font-bold bg-gray-300 rounded-lg mt-2"}>Получить
                             код
                         </button>
 
