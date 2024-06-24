@@ -2,35 +2,74 @@ import React, { useContext } from 'react';
 import { SearchContext } from "../contexts/SearchContext";
 import { useNavigate } from "react-router-dom";
 import { TbLetterA } from "react-icons/tb";
-import { MdShoppingCart } from "react-icons/md";
-import { FaUser } from "react-icons/fa";
-import { BsFillHeartFill } from "react-icons/bs";
+import { FaLocationDot } from "react-icons/fa6";
 import { AuthUserContext } from "../contexts/AuthUserContext";
 import { CatalogContext } from "../contexts/CatalogContext";
-import Catalog from '../veiws/Catalog/Catalog'; // Import the Catalog component
 
 const Header = () => {
     const { setSearchValue } = useContext(SearchContext);
     const navigate = useNavigate();
     const { authUser } = useContext(AuthUserContext);
     const { isOpenCatalog, setIsOpenCatalog } = useContext(CatalogContext);
+    const user = JSON.parse(localStorage.getItem("user"))
 
     return (
         <>
-            <header className={"w-full flex items-center justify-center"}>
-                <div className={'w-4/5 items-center flex border-b py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'}>
+            <header className={"w-full flex items-center justify-center flex-col"}>
+                <div className={'w-4/5 items-center flex py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[50px] tracking-wide relative z-50'}>
+                    <div className={"min-w-1/6 flex text-gray-700"}>
+                        <FaLocationDot />
+                        <span className={"text-sm ml-1"}>Шымкент</span>
+                        <div className={"flex justify-center"}>
+                            <span className={"ml-4 text-sm"}>{user.phone}</span>
+                        </div>
+                    </div>
+
+                    <div className={"w-4/5 flex items-center justify-between ml-4"}>
+                            <a href="#" className="text-gray-500 text-md font-bold">Обмен и возврат</a>
+                            <a href="#" className="text-gray-500 text-md font-bold">Статус заказа</a>
+                            <a href="#" className="text-gray-500 text-md font-bold">Магазины</a>
+                            <a href="#" className="text-gray-500 text-md font-bold">Доставка и оплата</a>
+                    </div>
+                </div>
+                <div
+                    className={'w-4/5 items-center flex border-b py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'}>
                     <div className={"w-1/6 flex items-center justify-around"}>
-                        <div className={"w-10 h-10 flex items-center justify-center bg-gray-500 rounded-lg mr-4 hover:cursor-pointer"} onClick={() => navigate('/')}>
+                        <div
+                            className={"w-10 h-10 flex items-center justify-center bg-gray-500 rounded-lg mr-4 hover:cursor-pointer"} onClick={() => navigate('/')}>
                             <TbLetterA className={"text-2xl text-amber-50"} />
                         </div>
-                        <div className={"flex bg-gray-500 px-5 py-2 rounded-xl text-amber-50 font-bold hover:cursor-pointer"}
-                             onClick={() => setIsOpenCatalog(!isOpenCatalog)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                 stroke="currentColor" className="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
-                            </svg>
-                            <span className={"ml-2"}>Каталог</span>
+                        <div
+                            className={`flex px-5 py-2 border-2 border-gray-500 rounded-xl font-bold hover:cursor-pointer ${
+                                isOpenCatalog ? 'bg-white text-black' : 'bg-gray-500 text-amber-50'
+                            }`}
+                            onClick={() => setIsOpenCatalog(!isOpenCatalog)}>
+
+                            {
+                                isOpenCatalog ? (
+                                    <div className="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                             fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round"
+                                             strokeLinejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                        <span className="ml-2 text-black">Каталог</span>
+                                    </div>
+                                ) : (
+                                    <div className="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                                             stroke="currentColor" className="size-6">
+                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                        </svg>
+                                        <span className="ml-2">Каталог</span>
+                                    </div>
+                                )
+                            }
+
+
+
                         </div>
                     </div>
 

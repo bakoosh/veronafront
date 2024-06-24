@@ -27,7 +27,7 @@ const Catalog = () => {
     console.log(catalogId);
 
     return (
-        <div className="w-full h-screen p-4 overflow-hidden flex">
+        <div className="w-full h-screen p-4 overflow-hidden flex pt-14">
             <aside className="w-1/5 bg-white p-4">
                 <div className="space-y-4">
                     <div className="text-xl font-bold">Все украшения</div>
