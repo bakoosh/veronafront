@@ -1,6 +1,8 @@
 import React, {useContext} from 'react';
 import {ModalContext} from "../contexts/ModalContext";
 import {CityContext} from "../contexts/CityContext";
+import { FaLocationDot } from "react-icons/fa6";
+
 
 const ChooseCity = () => {
     const {isOpen, setIsOpen} = React.useContext(ModalContext);
@@ -51,6 +53,9 @@ const ChooseCity = () => {
                 <h1 className={"text-sm text-gray-500 mt-3 hover:cursor-pointer hover:text-gray-600"} onClick={() => handleClick(city)}>{city}</h1>
             ))
         }
+    </div>
+    <div className={"w-full mt-20 h-10"}>
+        <FaLocationDot/>
     </div>
 </>
     );
