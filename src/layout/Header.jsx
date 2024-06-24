@@ -5,12 +5,14 @@ import { TbLetterA } from "react-icons/tb";
 import { FaLocationDot } from "react-icons/fa6";
 import { AuthUserContext } from "../contexts/AuthUserContext";
 import { CatalogContext } from "../contexts/CatalogContext";
+import {ModalContext} from "../contexts/ModalContext";
 
 const Header = () => {
     const { setSearchValue } = useContext(SearchContext);
     const navigate = useNavigate();
     const { authUser } = useContext(AuthUserContext);
     const { isOpenCatalog, setIsOpenCatalog } = useContext(CatalogContext);
+    const {isOpen, setIsOpen} = useContext(ModalContext)
     const user = JSON.parse(localStorage.getItem("user"))
 
     return (
@@ -19,7 +21,7 @@ const Header = () => {
                 <div className={'w-4/5 items-center flex py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[50px] tracking-wide relative z-50'}>
                     <div className={"min-w-1/6 flex text-gray-700"}>
                         <FaLocationDot />
-                        <span className={"text-sm ml-1"}>Шымкент</span>
+                        <span className={"text-sm ml-1 hover:cursor-pointer"} onClick={() => setIsOpen(!isOpen)}>Выберите</span>
                         <div className={"flex justify-center"}>
                             <span className={"ml-4 text-sm"}>{user.phone}</span>
                         </div>

@@ -7,12 +7,14 @@ import SearchProvider from "./contexts/SearchContext";
 import AuthProvider from "./contexts/AuthUserContext";
 import ErrorBoundary from "./config/ErrorBoundary";
 import CatalogProvider from "./contexts/CatalogContext";
+import ModalProvider from "./contexts/ModalContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
         <StrictMode>
-            <CatalogProvider>
-                <ErrorBoundary>
+            <ModalProvider>
+                <CatalogProvider>
+                    <ErrorBoundary>
                         <AuthProvider>
                             <SearchProvider>
                                 <BrowserRouter>
@@ -22,6 +24,7 @@ root.render(
                         </AuthProvider>
                     </ErrorBoundary>
                 </CatalogProvider>
+            </ModalProvider>
         </StrictMode>
     );
 

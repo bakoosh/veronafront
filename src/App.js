@@ -15,12 +15,13 @@ import ModalComponent from "./components/Modal";
 import ChooseCity from "./components/ChooseCity";
 import Catalog from "./veiws/Catalog/Catalog";
 import {CatalogContext} from "./contexts/CatalogContext";
+import {ModalContext} from "./contexts/ModalContext";
 
 
 function App() {
     const {authUser, setAuthUser} = useContext(AuthUserContext)
     const { isOpenCatalog, setIsOpenCatalog } = useContext(CatalogContext);
-    const [isOpen , setIsOpen] =  useState(false);
+    const {isOpen , setIsOpen} = useContext(ModalContext)
     useEffect(() => {
         const user = localStorage.getItem("user")
         if (user) {
@@ -32,6 +33,12 @@ function App() {
 
   return (
     <div className="App">
+        <ModalComponent
+            isOpen={isOpen}
+            onRequestClose={() =>  setIsOpen(!isOpen)}
+            Component={ChooseCity}
+            componentProps={'qweasdad'}
+        />
         <Header/>
         <div className="container mx-auto px-4">
             {isOpenCatalog && (

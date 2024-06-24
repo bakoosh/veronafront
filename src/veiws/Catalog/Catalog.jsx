@@ -3,6 +3,7 @@ import axios from 'axios';
 import Loader from '../../components/Loader';
 import { useNavigate } from 'react-router-dom';
 import { CatalogContext } from '../../contexts/CatalogContext';
+import Sidebar from "../../layout/Sidebar";
 
 const Catalog = () => {
     const [catalogs, setCatalogs] = useState([]);
@@ -28,69 +29,7 @@ const Catalog = () => {
 
     return (
         <div className="w-full h-screen p-4 overflow-hidden flex pt-14">
-            <aside className="w-1/5 bg-white p-4">
-                <div className="space-y-4">
-                    <div className="text-xl font-bold">Все украшения</div>
-                    <div className="space-y-2">
-                        <div className="flex items-center">
-                            <span className="icon mr-2"></span>
-                            <span className="ml-2 text-lg">Акции</span>
-                        </div>
-                        <div className="flex items-center">
-                            <span className="icon mr-2"></span>
-                            <span className="ml-2 text-lg">Новинки</span>
-                        </div>
-                        <div className="flex items-center">
-                            <span className="icon mr-2"></span>
-                            <span className="ml-2 text-lg">Premium</span>
-                        </div>
-                        <div className="flex items-center">
-                            <span className="icon mr-2"></span>
-                            <span className="ml-2 text-lg">Золото</span>
-                        </div>
-                        <div className="flex items-center">
-                            <span className="icon mr-2"></span>
-                            <span className="ml-2 text-lg">Цепи</span>
-                        </div>
-                        <div className="flex items-center">
-                            <span className="icon mr-2"></span>
-                            <span className="ml-2 text-lg">Свадьба</span>
-                        </div>
-                        <div className="flex items-center">
-                            <span className="icon mr-2"></span>
-                            <span className="ml-2 text-lg">Коллекции</span>
-                        </div>
-                        <div className="flex items-center">
-                            <span className="icon mr-2"></span>
-                            <span className="ml-2 text-lg">Серьги</span>
-                        </div>
-                        <div className="flex items-center">
-                            <span className="icon mr-2"></span>
-                            <span className="ml-2 text-lg">Кольца</span>
-                        </div>
-                        <div className="flex items-center">
-                            <span className="icon mr-2"></span>
-                            <span className="ml-2 text-lg">Браслеты</span>
-                        </div>
-                        <div className="flex items-center">
-                            <span className="icon mr-2"></span>
-                            <span className="ml-2 text-lg">Подвески</span>
-                        </div>
-                        <div className="flex items-center">
-                            <span className="icon mr-2"></span>
-                            <span className="ml-2 text-lg">Булавки</span>
-                        </div>
-                        <div className="flex items-center">
-                            <span className="icon mr-2"></span>
-                            <span className="ml-2 text-lg">Мужчинам</span>
-                        </div>
-                        <div className="flex items-center">
-                            <span className="icon mr-2"></span>
-                            <span className="ml-2 text-lg">Детям</span>
-                        </div>
-                    </div>
-                </div>
-            </aside>
+            <Sidebar/>
 
             <main className="flex-1 p-4">
                 <div className="grid grid-cols-2 gap-4 mb-4">
