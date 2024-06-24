@@ -3,7 +3,7 @@ import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import Products from "./veiws/Products/Products";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Main from "./veiws/Main/Main";
 import Login from "./veiws/Login/Login";
 import {AuthUserContext} from "./contexts/AuthUserContext";
@@ -13,11 +13,13 @@ import './config/axios-interceptors';
 import PrivateRoute from "./config/PrivateRoute";
 import ModalComponent from "./components/Modal";
 import ChooseCity from "./components/ChooseCity";
+import Catalog from "./veiws/Catalog/Catalog";
+import {CatalogContext} from "./contexts/CatalogContext";
 
 
 function App() {
     const {authUser, setAuthUser} = useContext(AuthUserContext)
-
+    const { isOpenCatalog, setIsOpenCatalog } = useContext(CatalogContext);
     const [isOpen , setIsOpen] =  useState(false);
     useEffect(() => {
         const user = localStorage.getItem("user")
@@ -32,7 +34,11 @@ function App() {
     <div className="App">
         <Header/>
         <div className="container mx-auto px-4">
-
+            {isOpenCatalog && (
+                <div className="absolute top-[70px] left-0 w-full bg-white z-40 shadow-md">
+                    <Catalog />
+                </div>
+            )}
             <div className={"flex"}>
                 <Routes>
                     <Route path="/" element={<Main/>}/>

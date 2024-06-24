@@ -3,6 +3,7 @@ import axios from 'axios';
 import Product from "./components/Product";
 import { SearchContext } from '../../contexts/SearchContext';
 import Loader from '../../components/Loader';
+import {CatalogContext} from "../../contexts/CatalogContext";
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -10,15 +11,21 @@ const Products = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const { searchValue } = useContext(SearchContext);
+    const {catalogId} = useContext(CatalogContext);
 
     useEffect(() => {
         fetchProducts(currentPage);
-    }, [currentPage]);
+    }, [currentPage, catalogId]);
 
     const fetchProducts = async (page) => {
         setLoading(true);
         try {
-            const response = await axios.get(`https://back.almaray.kz/api/products?page=${page}`);
+            let url = `https://back.almaray.kz/api/products?page=${page}`;
+            if (catalogId) {
+                url += `&catalog_id=${catalogId}`;
+            }
+
+            const response = await axios.get(url);
             if (response.data && response.data.data) {
                 setProducts(response.data.data);
                 setTotalPages(response.data.last_page);
