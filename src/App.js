@@ -16,12 +16,25 @@ import ChooseCity from "./components/ChooseCity";
 import Catalog from "./veiws/Catalog/Catalog";
 import {CatalogContext} from "./contexts/CatalogContext";
 import {ModalContext} from "./contexts/ModalContext";
+import {CityContext} from "./contexts/CityContext";
 
 
 function App() {
     const {authUser, setAuthUser} = useContext(AuthUserContext)
     const { isOpenCatalog, setIsOpenCatalog } = useContext(CatalogContext);
     const {isOpen , setIsOpen} = useContext(ModalContext)
+    const {city , setCity} = useContext(CityContext)
+
+    useEffect(() => {
+        const city = localStorage.getItem("city");
+        if (city) {
+            setCity(city)
+        }
+        else {
+            setCity(null)
+        }
+    }, []);
+
     useEffect(() => {
         const user = localStorage.getItem("user")
         if (user) {
@@ -37,7 +50,6 @@ function App() {
             isOpen={isOpen}
             onRequestClose={() =>  setIsOpen(!isOpen)}
             Component={ChooseCity}
-            componentProps={'qweasdad'}
         />
         <Header/>
         <div className="container mx-auto px-4">

@@ -44,7 +44,7 @@ const Catalog = () => {
                     ) : (
                         catalogs.map(catalog => (
                             <h1
-                                key={catalog.id} // Adding key to list items
+                                key={catalog.id}
                                 className="text-2xl hover:cursor-pointer"
                                 onClick={() => handleClick(catalog.id)}
                             >

@@ -8,23 +8,26 @@ import AuthProvider from "./contexts/AuthUserContext";
 import ErrorBoundary from "./config/ErrorBoundary";
 import CatalogProvider from "./contexts/CatalogContext";
 import ModalProvider from "./contexts/ModalContext";
+import CityProvider from "./contexts/CityContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
         <StrictMode>
-            <ModalProvider>
-                <CatalogProvider>
-                    <ErrorBoundary>
-                        <AuthProvider>
-                            <SearchProvider>
-                                <BrowserRouter>
-                                    <App />
-                                </BrowserRouter>
-                            </SearchProvider>
-                        </AuthProvider>
-                    </ErrorBoundary>
-                </CatalogProvider>
-            </ModalProvider>
+            <CityProvider>
+                <ModalProvider>
+                    <CatalogProvider>
+                        <ErrorBoundary>
+                            <AuthProvider>
+                                <SearchProvider>
+                                    <BrowserRouter>
+                                        <App />
+                                    </BrowserRouter>
+                                </SearchProvider>
+                            </AuthProvider>
+                        </ErrorBoundary>
+                    </CatalogProvider>
+                </ModalProvider>
+            </CityProvider>
         </StrictMode>
     );
 
