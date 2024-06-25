@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.24.7",
     "tailwindcss": "^3.4.4"
   }
 }

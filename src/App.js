@@ -48,7 +48,7 @@ function App() {
 
   return (
     <div className="App">
-        <ToastContainer />
+        <ToastContainer autoClose={3000} position="top-right" style={{ zIndex: 9999 }} />
 
         <ModalComponent
             isOpen={isOpen}

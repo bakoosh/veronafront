@@ -16,6 +16,18 @@ const Catalog = () => {
         'Красное золото'
     ]
 
+    const imageMap = {
+        1: '/catalogImages/браслеты.png',
+        2: '/catalogImages/кольца.png',
+        3: '/catalogImages/серьги.png',
+        4: '/catalogImages/серьги.png',
+    };
+
+    const goldMap = {
+        1: '/golds/желтое золото_ImgID1.png',
+        2: '/golds/красное золото_ImgID1.png',
+    };
+
     useEffect(() => {
         setLoading(true);
         axios.get('http://127.0.0.1:8000/api/catalogs').then(response => {
@@ -52,30 +64,24 @@ const Catalog = () => {
                         <Loader/>
                     ) : (
                         catalogs.map(catalog => (
-                            <h1
-                                key={catalog.id}
-                                className="text-2xl hover:cursor-pointer"
-                                onClick={() => handleClick(catalog.id)}
-                            >
-                                {catalog.name}
-                            </h1>
+                            <div key={catalog.id} className="text-2xl hover:cursor-pointer flex items-center justify-center" onClick={() => handleClick(catalog.id)}>
+                                <img src={imageMap[catalog.id]} alt={catalog.name} className="h-16 mr-2 object-cover mb-2 rounded-3xl"/>
+                                <h1>{catalog.name}</h1>
+                            </div>
                         ))
                     )}
                 </div>
 
                 <div className="text-gray-500 mb-2 mt-20">Материал -</div>
-                <div className="grid grid-cols-3 gap-16 mb-4 text-gray-700">
+                <div className="flex items-center justify-center gap-16 mb-4 text-gray-700">
                     {loading ? (
                         <Loader/>
                     ) : (
-                        golds.map(gold => (
-                            <h1
-                                className="text-2xl hover:cursor-pointer"
-                                key={gold}
-                                //onClick
-                            >
-                                {gold}
-                            </h1>
+                        golds.map((gold, index) => (
+                            <div key={index} className="text-2xl mx-10 hover:cursor-pointer">
+                                <img src={goldMap[index + 1]} alt={gold} className="w-full h-36 object-cover mb-2 rounded-3xl"/>
+                                <h1>{gold}</h1>
+                            </div>
                         ))
                     )}
                 </div>

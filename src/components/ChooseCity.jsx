@@ -2,9 +2,8 @@ import React, { useContext } from 'react';
 import { ModalContext } from "../contexts/ModalContext";
 import { CityContext } from "../contexts/CityContext";
 import { FaLocationDot } from "react-icons/fa6";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ChooseCity = () => {
     const { isOpen, setIsOpen } = React.useContext(ModalContext);
     const [search, setSearch] = React.useState('');
@@ -14,7 +13,9 @@ const ChooseCity = () => {
         localStorage.setItem('city', city);
         setCity(city);
         setIsOpen(!isOpen);
-        toast.success(`Selected city: ${city}`);
+        toast.success(`Выбранный город: ${city}`, {
+            closeButton: true
+        });
     };
 
     const cities = [
@@ -63,7 +64,9 @@ const ChooseCity = () => {
                 <FaLocationDot/>
                 <span className={"ml-2 mt-1 hover:cursor-pointer"}>Определить город автоматический</span>
             </div>
-            <ToastContainer />
+            <ToastContainer className="reset" />
+
+
         </>
     );
 };
