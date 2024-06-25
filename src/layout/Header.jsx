@@ -96,17 +96,25 @@ const Header = () => {
                         <ul className={"list-none flex items-center justify-around"}>
                             <div className={"flex flex-col items-center"}>
                                 <li className={"flex items-center"}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
-                                        <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd"/>
+                                    <svg className="w-8 h-8 text-gray-600" viewBox="0 0 87.92 112.76">
+                                        <g>
+                                            <path className="fill-current"
+                                                  d="M67.66 23.7c0,13.08 -10.61,23.69 -23.7,23.69 -13.09,0 -23.69,-10.61 -23.69,-23.69 0,-13.09 10.61,-23.7 23.69,-23.7 13.09,0 23.7,10.61 23.7,23.7z"/>
+                                            <path className="fill-current"
+                                                  d="M43.96 57.26c-24.28,0 -43.96,19.68 -43.96,43.96 0,6.37 5.16,11.54 11.54,11.54h64.85c6.37,0 11.54,-5.16 11.54,-11.54 0,-24.28 -19.68,-43.96 -43.96,-43.96z"/>
+                                        </g>
                                     </svg>
+
                                 </li>
                                 {authUser ? (
-                                    <p className={"text-sm hover:cursor-pointer text-gray-400"} onClick={() => navigate('/me')}>
+                                    <p className={"text-sm hover:cursor-pointer text-gray-400"}
+                                       onClick={() => navigate('/me')}>
                                         Кабинет
                                     </p>
                                 ) : (
-                                    <p className={"text-sm hover:cursor-pointer text-gray-400"} onClick={() => navigate('/login')}>
-                                        Войти
+                                    <p className={"text-sm hover:cursor-pointer text-gray-400"}
+                                       onClick={() => navigate('/login')}>
+                                    Войти
                                     </p>
                                 )}
                             </div>
@@ -122,11 +130,16 @@ const Header = () => {
                             </div>
                             <div className={"flex flex-col items-center"}>
                                 <li className={"flex items-center"}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
-                                        <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z"/>
+                                    <svg className="w-8 h-8 text-gray-600" viewBox="0 0 77.18 72.55">
+                                        <g>
+                                            <path className="fill-current"
+                                                  d="M0 2.58c0 4.84 5.11 2.68 8.03 3.37 0.83 0.2 1.1 0.47 1.58 0.99 0.48 0.52 0.61 1.1 0.85 1.88 2.86 9.45 5.45 19.66 8.26 28.95 0.85 2.8 1.51 5.49 2.37 8.34 0.73 2.42 1.52 6.09 2.69 7.84 1.21 1.82 3.98 3.82 7.02 3.82h33.21c1.68 0 3.3-0.82 4.38-1.51 3.15-2.04 3.52-4.69 4.17-7.85l3.77-20.14c0.64-3.3 1.82-6.26-0.63-7.66-1.19-0.68-9.04-0.35-10.77-0.35-14.9 0-29.81 0-44.71 0-1.04-2.1-3.57-13.87-5.46-16.52-0.83-1.16-1.94-2.14-3.25-2.79-2.6-1.29-5.58-0.9-8.91-0.9-1.16 0-2.6 1.4-2.6 2.53zm50.46 63.82c0 6.29 6.84 7.7 10.16 4.47 3.32-3.23 1.87-9.88-4.6-9.88-2.86 0-5.57 2.63-5.57 5.41zm-17.81 0c0 6.29 6.84 7.7 10.16 4.47 3.32-3.23 1.87-9.88-4.6-9.88-2.86 0-5.57 2.63-5.57 5.41z"/>
+                                        </g>
                                     </svg>
+
                                 </li>
-                                <p className={"text-sm hover:cursor-pointer text-gray-400"} onClick={() => navigate('/basket')}>
+                                <p className={"text-sm hover:cursor-pointer text-gray-400"}
+                                   onClick={() => navigate('/basket')}>
                                     Корзина
                                 </p>
                             </div>

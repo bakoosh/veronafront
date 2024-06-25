@@ -42,6 +42,12 @@ const Catalog = () => {
         navigate('/products');
     }
 
+    const handleGoldClick = () => {
+        navigate('/products');
+        setIsOpenCatalog(!isOpenCatalog);
+
+    }
+
     return (
         <div className="w-full h-screen p-4 overflow-hidden flex pt-14">
             <Sidebar/>
@@ -78,7 +84,7 @@ const Catalog = () => {
                         <Loader/>
                     ) : (
                         golds.map((gold, index) => (
-                            <div key={index} className="text-2xl mx-10 hover:cursor-pointer">
+                            <div key={index} className="text-2xl mx-10 hover:cursor-pointer" onClick={() => handleGoldClick()}>
                                 <img src={goldMap[index + 1]} alt={gold} className="w-full h-36 object-cover mb-2 rounded-3xl"/>
                                 <h1>{gold}</h1>
                             </div>
