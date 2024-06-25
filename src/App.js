@@ -17,21 +17,23 @@ import Catalog from "./veiws/Catalog/Catalog";
 import {CatalogContext} from "./contexts/CatalogContext";
 import {ModalContext} from "./contexts/ModalContext";
 import {CityContext} from "./contexts/CityContext";
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
     const {authUser, setAuthUser} = useContext(AuthUserContext)
     const { isOpenCatalog, setIsOpenCatalog } = useContext(CatalogContext);
     const {isOpen , setIsOpen} = useContext(ModalContext)
-    const {city , setCity} = useContext(CityContext)
+    const {setCity} = useContext(CityContext)
 
     useEffect(() => {
-        const city = localStorage.getItem("city");
+        const city = localStorage.getItem("city") ? localStorage.getItem("city") : null;
         if (city) {
             setCity(city)
         }
         else {
-            setCity(null)
+            setCity('')
         }
     }, []);
 
@@ -40,12 +42,14 @@ function App() {
         if (user) {
             setAuthUser(JSON.parse(user));}
         else {
-            setAuthUser(null)
+            setAuthUser(undefined)
         }
     }, []);
 
   return (
     <div className="App">
+        <ToastContainer />
+
         <ModalComponent
             isOpen={isOpen}
             onRequestClose={() =>  setIsOpen(!isOpen)}
