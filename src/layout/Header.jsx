@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { SearchContext } from "../contexts/SearchContext";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import { TbLetterA } from "react-icons/tb";
 import { FaLocationDot } from "react-icons/fa6";
 import { AuthUserContext } from "../contexts/AuthUserContext";
@@ -15,19 +15,20 @@ const Header = () => {
     const { isOpenCatalog, setIsOpenCatalog } = useContext(CatalogContext);
     const { city } = useContext(CityContext);
     const { isOpen, setIsOpen } = useContext(ModalContext);
+    const location = useLocation();
 
-    // Получение данных пользователя из localStorage
+
     const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
 
     return (
         <>
             <header className={"w-full flex items-center justify-center flex-col"}>
                 <div className={'w-4/5 items-center flex py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[50px] tracking-wide relative z-50'}>
-                    <div className={"min-w-1/6 flex text-gray-700"}>
+                    <div className={"min-w-1/6 text-gray-700 flex items-center"}>
                         <FaLocationDot />
                         {
                             city.length ? (
-                                <span className={"text-sm ml-1 hover:cursor-pointer"} onClick={() => setIsOpen(!isOpen)}>
+                                <span className={"text-md ml-1 hover:cursor-pointer"} onClick={() => setIsOpen(!isOpen)}>
                                     {city}
                                 </span>
                             ) : (
@@ -88,7 +89,7 @@ const Header = () => {
                         <input
                             type="text"
                             placeholder={"Поиск по ассортименту"}
-                            onChange={(e) => setSearchValue(e.target.value)}
+                            onChange={(e) => location.pathname !== '/' ? setSearchValue(e.target.value) : navigate('/products')}
                             className={"w-[80%] border-black border-2 rounded-lg text-sm px-10 py-2"}
                         />
                     </div>
