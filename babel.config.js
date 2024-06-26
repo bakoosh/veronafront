@@ -1,7 +1,6 @@
 module.exports = {
     presets: [
-        ["@babel/preset-react", {
-            "throwIfNamespace": false
-        }]
+        ['@babel/preset-env', { targets: "defaults" }],
+        ['@babel/preset-react', { throwIfNamespace: false }]
     ]
 };

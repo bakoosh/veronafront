@@ -1,6 +1,7 @@
 import React, {memo} from 'react';
 import axios from "axios";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Product = ({ product }) => {
 
 
@@ -10,6 +11,7 @@ const Product = ({ product }) => {
             const response = await axios.post('http://127.0.0.1:8000/api/favourites', {
                 product_id: product_id
             });
+            toast.success('Добавлено в избранное')
             console.log(response.data);
         } catch (error) {
             console.error('Error:', error);
@@ -20,8 +22,9 @@ const Product = ({ product }) => {
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/basket', {
                 product_id: product_id,
-
+                quantity: 1 ,
             });
+            toast.success('Добавлено в корзину')
             console.log(response.data);
         } catch (error) {
             console.error('Error:', error);
@@ -30,6 +33,7 @@ const Product = ({ product }) => {
 
 
     return (
+
         <div className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
                 <img className="rounded-t-lg" src={product.image} alt={product.name} />
@@ -59,7 +63,11 @@ const Product = ({ product }) => {
                     className={"bg-black py-3 px-3 text-amber-50 ml-3"}>click to basket
                 </button>
             </div>
+
+            <ToastContainer className="reset" />
+
         </div>
+
     );
 };
 

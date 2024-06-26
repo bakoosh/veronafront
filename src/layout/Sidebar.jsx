@@ -45,7 +45,9 @@ const Sidebar = () => {
                             <span className="ml-2 text-lg">Свадьба</span>
                         </div>
                         <div className="flex items-center">
-                            <span className="icon mr-2"></span>
+                            <span className="icon mr-2">
+
+                            </span>
                             <span className="ml-2 text-lg">Коллекции</span>
                         </div>
                         <div className="flex items-center">

@@ -17,7 +17,7 @@ import Catalog from "./veiws/Catalog/Catalog";
 import {CatalogContext} from "./contexts/CatalogContext";
 import {ModalContext} from "./contexts/ModalContext";
 import {CityContext} from "./contexts/CityContext";
-import {ToastContainer} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Basket from "./veiws/Basket/Basket";
 
