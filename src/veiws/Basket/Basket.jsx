@@ -3,16 +3,19 @@ import axios from 'axios';
 import { CatalogContext } from '../../contexts/CatalogContext';
 import { SearchContext } from '../../contexts/SearchContext';
 import Product from '../Products/components/Product';
+import SkeletonProduct from "../../components/SkeletonProduct";
 
 const Basket = () => {
     const [products, setProducts] = useState([]);
     const { searchValue } = useContext(SearchContext);
     const { isOpenCatalog, setIsOpenCatalog } = useContext(CatalogContext);
-
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
+        setLoading(true)
         axios.get('http://127.0.0.1:8000/api/basket')
             .then((response) => {
                 setProducts(response.data);
+                setLoading(false)
             })
             .catch((error) => {
                 console.error('Error fetching basket:', error);
@@ -27,9 +30,11 @@ const Basket = () => {
         <div className="w-full">
             {filteredProducts.length > 0 ? (
                 <div className="grid grid-cols-3 gap-4">
-                    {filteredProducts.map((product) => (
-                        <Product key={product.id} product={product} />
-                    ))}
+                    {loading
+                        ? Array.from({ length: 9 }).map((_, index) => <SkeletonProduct key={index} />)
+                        : filteredProducts.map(product => (
+                            <Product key={product.id} product={product} />
+                        ))}
                 </div>
             ) : (
                 <div className="w-full h-[500px] flex items-center justify-center">
@@ -50,7 +55,6 @@ const Basket = () => {
                         </div>
                     </div>
                     <div className="w-1/2 h-2/3 mt-3.5 flex items-center justify-center">
-                        {/* SVG or any other graphical representation */}
                         <svg
                             className="w-64 h-64 relative -top-10"
                             width="271.124mm"
@@ -58,7 +62,7 @@ const Basket = () => {
                             version="1.1"
                             viewBox="0 0 59357.79 59357.79"
                         >
-                            {/* SVG Path or Polygon details */}
+
                         </svg>
                     </div>
                 </div>

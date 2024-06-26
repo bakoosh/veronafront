@@ -3,7 +3,8 @@ import axios from 'axios';
 import Product from "./components/Product";
 import { SearchContext } from '../../contexts/SearchContext';
 import Loader from '../../components/Loader';
-import {CatalogContext} from "../../contexts/CatalogContext";
+import { CatalogContext } from "../../contexts/CatalogContext";
+import SkeletonProduct from '../../components/SkeletonProduct';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -11,7 +12,7 @@ const Products = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const { searchValue } = useContext(SearchContext);
-    const {catalogId} = useContext(CatalogContext);
+    const { catalogId } = useContext(CatalogContext);
 
     useEffect(() => {
         fetchProducts(currentPage);
@@ -43,7 +44,7 @@ const Products = () => {
         product.name.toLowerCase().includes(searchValue.toLowerCase())
     );
 
-    const handlePageChange  = (page) => {
+    const handlePageChange = (page) => {
         setCurrentPage(page);
     };
 
@@ -74,9 +75,11 @@ const Products = () => {
     return (
         <div className="w-full flex flex-col items-center justify-center">
             <div className="w-4/5 grid grid-cols-3 gap-4">
-                {filteredProducts.map(product => (
-                    <Product key={product.id} product={product} />
-                ))}
+                {loading
+                    ? Array.from({ length: 9 }).map((_, index) => <SkeletonProduct key={index} />)
+                    : filteredProducts.map(product => (
+                        <Product key={product.id} product={product} />
+                    ))}
             </div>
             {loading && <Loader />}
             <div className="flex justify-center my-4">
