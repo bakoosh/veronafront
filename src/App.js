@@ -27,6 +27,8 @@ function App() {
     const { isOpenCatalog, setIsOpenCatalog } = useContext(CatalogContext);
     const {isOpen , setIsOpen} = useContext(ModalContext)
     const {setCity} = useContext(CityContext)
+    const location = useLocation();
+
 
     useEffect(() => {
         const city = localStorage.getItem("city") ? localStorage.getItem("city") : null;
@@ -46,6 +48,11 @@ function App() {
             setAuthUser(undefined)
         }
     }, []);
+
+
+    useEffect(() => {
+        setIsOpenCatalog(false)
+    }, [location.pathname]);
 
 
 
