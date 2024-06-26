@@ -94,7 +94,7 @@ const Header = () => {
                     </div>
                     <div className={"w-1/3 ml-4"}>
                         <ul className={"list-none flex items-center justify-around"}>
-                            <div className={"flex flex-col items-center"}>
+                            <div className={"flex flex-col items-center hover:cursor-pointer"} onClick={() => navigate(`${authUser ? '/me' : '/login'}`)}>
                                 <li className={"flex items-center"}>
                                     <svg className="w-8 h-8 text-gray-600" viewBox="0 0 87.92 112.76">
                                         <g>
@@ -118,7 +118,7 @@ const Header = () => {
                                     </p>
                                 )}
                             </div>
-                            <div className={"flex flex-col items-center"}>
+                            <div className={"flex flex-col items-center hover:cursor-pointer"}>
                                 <li className={"flex items-center"}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32.6266mm" height="26.2717mm"
                                          viewBox="0 0 150.93 121.54" className="fill-gray-600 w-8 h-8">
@@ -131,7 +131,7 @@ const Header = () => {
                                     Избранное
                                 </p>
                             </div>
-                            <div className={"flex flex-col items-center"}>
+                            <div className={"flex flex-col items-center hover:cursor-pointer"} onClick={() => navigate('/basket')}>
                                 <li className={"flex items-center"}>
                                     <svg className="w-8 h-8 text-gray-600" viewBox="0 0 77.18 72.55">
                                     <g>
@@ -141,8 +141,7 @@ const Header = () => {
                                     </svg>
 
                                 </li>
-                                <p className={"text-sm hover:cursor-pointer text-gray-400"}
-                                   onClick={() => navigate('/basket')}>
+                                <p className={"text-sm text-gray-400"}>
                                     Корзина
                                 </p>
                             </div>

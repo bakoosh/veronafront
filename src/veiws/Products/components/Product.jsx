@@ -15,6 +15,7 @@ const Product = ({ product }) => {
             console.log(response.data);
         } catch (error) {
             console.error('Error:', error);
+            toast.error("Чтобы добавлять товар в избранное надо авторизоваться!!")
         }
     };
 
@@ -28,6 +29,7 @@ const Product = ({ product }) => {
             console.log(response.data);
         } catch (error) {
             console.error('Error:', error);
+            toast.error("Чтобы добавлять товар в корзину надо авторизоваться!!")
         }
     }
 
