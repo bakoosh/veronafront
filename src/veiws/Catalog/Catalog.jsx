@@ -78,13 +78,13 @@ const Catalog = () => {
                     )}
                 </div>
 
-                <div className="text-gray-500 mb-2 mt-20">Материал -</div>
+                <div className="text-gray-500 mb-2 ">Материал -</div>
                 <div className="flex items-center justify-center gap-16 mb-4 text-gray-700">
                     {loading ? (
                         <Loader/>
                     ) : (
                         golds.map((gold, index) => (
-                            <div key={index} className="text-2xl mx-10 hover:cursor-pointer" onClick={() => handleGoldClick()}>
+                            <div key={index} className="text-2xl mx-10  hover:cursor-pointer" onClick={() => handleGoldClick()}>
                                 <img src={goldMap[index + 1]} alt={gold} className="w-full h-36 object-cover mb-2 rounded-3xl"/>
                                 <h1>{gold}</h1>
                             </div>

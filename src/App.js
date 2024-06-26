@@ -19,6 +19,7 @@ import {ModalContext} from "./contexts/ModalContext";
 import {CityContext} from "./contexts/CityContext";
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Basket from "./veiws/Basket/Basket";
 
 
 function App() {
@@ -71,6 +72,14 @@ function App() {
                         element={
                             <PrivateRoute authUser={authUser}>
                                 <Favourites />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/basket"
+                        element={
+                            <PrivateRoute authUser={authUser}>
+                                <Basket />
                             </PrivateRoute>
                         }
                     />
