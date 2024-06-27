@@ -1,5 +1,15 @@
 import React from 'react';
 import Newest from "../icons/Newests";
+import Premium from "../icons/Premium";
+import Marry from "../icons/Marry";
+import Adult from "../icons/Adult";
+import Podveski from "../icons/Podveski";
+import Man from "../icons/Man";
+import Bulavki from "../icons/Bulavki";
+import Braslety from "../icons/Braslety";
+import Kolcca from "../icons/Kolcca";
+import Shares from "../icons/Shares";
+import Gold from "../icons/Gold";
 
 const Sidebar = () => {
     return (
@@ -9,7 +19,9 @@ const Sidebar = () => {
                     <div className="text-xl font-bold">Все украшения</div>
                     <div className="space-y-2">
                         <div className="flex items-center">
-                            <span className="icon mr-2"></span>
+                            <span className="icon mr-2">
+                                <Shares/>
+                            </span>
                             <span className="ml-2 text-lg">Акции</span>
                         </div>
                         <div className="flex items-center">
@@ -19,11 +31,15 @@ const Sidebar = () => {
                             <span className="ml-2 text-lg">Новинки</span>
                         </div>
                         <div className="flex items-center">
-                            <span className="icon mr-2"></span>
+                            <span className="icon mr-2">
+                                <Premium/>
+                            </span>
                             <span className="ml-2 text-lg">Premium</span>
                         </div>
                         <div className="flex items-center">
-                            <span className="icon mr-2"></span>
+                            <span className="icon mr-2">
+                                <Gold/>
+                            </span>
                             <span className="ml-2 text-lg">Золото</span>
                         </div>
                         <div className="flex items-center">
@@ -44,12 +60,14 @@ const Sidebar = () => {
                             <span className="ml-2 text-lg">Цепи</span>
                         </div>
                         <div className="flex items-center">
-                            <span className="icon mr-2">    </span>
+                            <span className="icon mr-2">
+                                <Marry/>
+                            </span>
                             <span className="ml-2 text-lg">Свадьба</span>
                         </div>
                         <div className="flex items-center">
                             <span className="icon mr-2">
-
+<Gold/>
                             </span>
                             <span className="ml-2 text-lg">Коллекции</span>
                         </div>
@@ -67,27 +85,39 @@ const Sidebar = () => {
                             <span className="ml-2 text-lg">Серьги</span>
                         </div>
                         <div className="flex items-center">
-                            <span className="icon mr-2"></span>
+                            <span className="icon mr-2">
+                                <Kolcca/>
+                            </span>
                             <span className="ml-2 text-lg">Кольца</span>
                         </div>
                         <div className="flex items-center">
-                            <span className="icon mr-2"></span>
+                            <span className="icon mr-2">
+                                <Braslety/>
+                            </span>
                             <span className="ml-2 text-lg">Браслеты</span>
                         </div>
                         <div className="flex items-center">
-                            <span className="icon mr-2"></span>
+                            <span className="icon mr-2">
+                                <Podveski/>
+                            </span>
                             <span className="ml-2 text-lg">Подвески</span>
                         </div>
                         <div className="flex items-center">
-                            <span className="icon mr-2"></span>
+                            <span className="icon mr-2">
+                                <Bulavki/>
+                            </span>
                             <span className="ml-2 text-lg">Булавки</span>
                         </div>
                         <div className="flex items-center">
-                            <span className="icon mr-2"></span>
+                            <span className="icon mr-2">
+                                <Man/>
+                            </span>
                             <span className="ml-2 text-lg">Мужчинам</span>
                         </div>
                         <div className="flex items-center">
-                            <span className="icon mr-2"></span>
+                            <span className="icon mr-2">
+                                <Adult/>
+                            </span>
                             <span className="ml-2 text-lg">Детям</span>
                         </div>
                     </div>
