@@ -9,25 +9,31 @@ import ErrorBoundary from "./config/ErrorBoundary";
 import CatalogProvider from "./contexts/CatalogContext";
 import ModalProvider from "./contexts/ModalContext";
 import CityProvider from "./contexts/CityContext";
+import FavouriteProvider from "./contexts/FavouriteContext";
+import BasketProvider from "./contexts/BasketContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
         <StrictMode>
-            <CityProvider>
-                <ModalProvider>
-                    <CatalogProvider>
-                        <ErrorBoundary>
-                            <AuthProvider>
-                                <SearchProvider>
-                                    <BrowserRouter>
-                                        <App />
-                                    </BrowserRouter>
-                                </SearchProvider>
-                            </AuthProvider>
-                        </ErrorBoundary>
-                    </CatalogProvider>
-                </ModalProvider>
-            </CityProvider>
+            <FavouriteProvider>
+                <BasketProvider>
+                    <CityProvider>
+                        <ModalProvider>
+                            <CatalogProvider>
+                                <ErrorBoundary>
+                                    <AuthProvider>
+                                        <SearchProvider>
+                                            <BrowserRouter>
+                                                <App />
+                                            </BrowserRouter>
+                                        </SearchProvider>
+                                    </AuthProvider>
+                                </ErrorBoundary>
+                            </CatalogProvider>
+                        </ModalProvider>
+                    </CityProvider>
+                </BasketProvider>
+            </FavouriteProvider>
         </StrictMode>
     );
 

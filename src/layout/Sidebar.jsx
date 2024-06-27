@@ -10,39 +10,41 @@ import Braslety from "../icons/Braslety";
 import Kolcca from "../icons/Kolcca";
 import Shares from "../icons/Shares";
 import Gold from "../icons/Gold";
+import {useNavigate} from "react-router-dom";
 
 const Sidebar = () => {
+    const navigate = useNavigate();
     return (
 
             <aside className="w-1/5 bg-white p-4">
                 <div className="space-y-4">
                     <div className="text-xl font-bold">Все украшения</div>
                     <div className="space-y-2">
-                        <div className="flex items-center">
+                        <div className="flex items-center hover:cursor-pointer" onClick={() => navigate('/products')}>
                             <span className="icon mr-2">
                                 <Shares/>
                             </span>
                             <span className="ml-2 text-lg">Акции</span>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center hover:cursor-pointer" onClick={() => navigate('/products')}>
                             <span className="icon mr-2">
                                 <Newest/>
                             </span>
                             <span className="ml-2 text-lg">Новинки</span>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center hover:cursor-pointer" onClick={() => navigate('/products')}>
                             <span className="icon mr-2">
                                 <Premium/>
                             </span>
                             <span className="ml-2 text-lg">Premium</span>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center hover:cursor-pointer" onClick={() => navigate('/products')}>
                             <span className="icon mr-2">
                                 <Gold/>
                             </span>
                             <span className="ml-2 text-lg">Золото</span>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center hover:cursor-pointer" onClick={() => navigate('/products')}>
                             <span className="icon mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="19.7405mm"
                                                              height="19.7405mm" version="1.1" viewBox="0 0 38.55 38.55"
                                                              className="fill-black size-5">
@@ -59,19 +61,19 @@ const Sidebar = () => {
 </span>
                             <span className="ml-2 text-lg">Цепи</span>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center hover:cursor-pointer" onClick={() => navigate('/products')}>
                             <span className="icon mr-2">
                                 <Marry/>
                             </span>
                             <span className="ml-2 text-lg">Свадьба</span>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center hover:cursor-pointer" onClick={() => navigate('/products')}>
                             <span className="icon mr-2">
-<Gold/>
+                                <Gold/>
                             </span>
                             <span className="ml-2 text-lg">Коллекции</span>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center hover:cursor-pointer" onClick={() => navigate('/products')}>
                             <span className="icon mr-2">
                                 <svg width="15.0762mm" height="20.3866mm" viewBox="0 0 22.59 30.55"
                                      className="text-black size-5">
@@ -84,37 +86,37 @@ const Sidebar = () => {
                             </span>
                             <span className="ml-2 text-lg">Серьги</span>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center hover:cursor-pointer" onClick={() => navigate('/products')}>
                             <span className="icon mr-2">
                                 <Kolcca/>
                             </span>
                             <span className="ml-2 text-lg">Кольца</span>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center hover:cursor-pointer" onClick={() => navigate('/products')}>
                             <span className="icon mr-2">
                                 <Braslety/>
                             </span>
                             <span className="ml-2 text-lg">Браслеты</span>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center hover:cursor-pointer" onClick={() => navigate('/products')}>
                             <span className="icon mr-2">
                                 <Podveski/>
                             </span>
                             <span className="ml-2 text-lg">Подвески</span>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center hover:cursor-pointer" onClick={() => navigate('/products')}>
                             <span className="icon mr-2">
                                 <Bulavki/>
                             </span>
                             <span className="ml-2 text-lg">Булавки</span>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center hover:cursor-pointer" onClick={() => navigate('/products')}>
                             <span className="icon mr-2">
                                 <Man/>
                             </span>
                             <span className="ml-2 text-lg">Мужчинам</span>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center hover:cursor-pointer" onClick={() => navigate('/products')}>
                             <span className="icon mr-2">
                                 <Adult/>
                             </span>
