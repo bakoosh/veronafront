@@ -4,6 +4,7 @@ import { CityContext } from "../contexts/CityContext";
 import { FaLocationDot } from "react-icons/fa6";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
 const ChooseCity = () => {
     const { isOpen, setIsOpen } = React.useContext(ModalContext);
     const [search, setSearch] = React.useState('');
@@ -36,6 +37,32 @@ const ChooseCity = () => {
         city.toLowerCase().includes(search.toLowerCase())
     );
 
+    const getLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    fetchCityFromCoordinates(latitude, longitude);
+                },
+                (error) => {
+                    console.error('Error getting location:', error);
+                }
+            );
+        } else {
+            console.error('Geolocation is not supported by this browser.');
+        }
+    }
+
+    async function fetchCityFromCoordinates(latitude, longitude) {
+        await axios.post('http://127.0.0.1:8000/api/getCityFromCoordinates', { latitude, longitude })
+            .then(response => {
+                toast.success('Ваш город:', response.data.city);
+            })
+            .catch(error => {
+                toast.error('Не получилось определить ваш город');
+            });
+    }
+
     return (
         <>
             <div className={"w-full h-1/6"}>
@@ -60,7 +87,7 @@ const ChooseCity = () => {
                     ))
                 }
             </div>
-            <div className={"w-full mt-20 h-10 flex items-center justify-center text-gray-600"}>
+            <div className={"w-full mt-20 h-10 flex items-center justify-center text-gray-600"} onClick={() => getLocation()}>
                 <FaLocationDot/>
                 <span className={"ml-2 mt-1 hover:cursor-pointer"}>Определить город автоматический</span>
             </div>
