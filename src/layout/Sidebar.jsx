@@ -1,4 +1,5 @@
 import React from 'react';
+import Newest from "../icons/Newests";
 
 const Sidebar = () => {
     return (
@@ -12,7 +13,9 @@ const Sidebar = () => {
                             <span className="ml-2 text-lg">Акции</span>
                         </div>
                         <div className="flex items-center">
-                            <span className="icon mr-2"></span>
+                            <span className="icon mr-2">
+                                <Newest/>
+                            </span>
                             <span className="ml-2 text-lg">Новинки</span>
                         </div>
                         <div className="flex items-center">

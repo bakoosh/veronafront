@@ -51,10 +51,56 @@ const Header = () => {
                 <div className={'w-4/5 items-center flex border-b py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'}>
                     <div className={"w-1/6 flex items-center justify-around"}>
                         <div
-                            className={"w-10 h-10 flex items-center justify-center bg-gray-500 rounded-lg mr-4 hover:cursor-pointer"}
+                            className={"size-11 flex items-center justify-center bg-gray-500 rounded-lg mr-4 hover:cursor-pointer"}
                             onClick={() => navigate('/')}
                         >
-                            <TbLetterA className={"text-2xl text-amber-50"} />
+                            <svg
+                                width="27.3756mm"
+                                className={"size-6"}
+                                height="25.137mm"
+                                viewBox="0 0 74.99 68.86"
+                                style={{
+                                    shapeRendering: 'geometricPrecision',
+                                    textRendering: 'geometricPrecision',
+                                    imageRendering: 'optimizeQuality',
+                                    fillRule: 'evenodd',
+                                    clipRule: 'evenodd'
+                                }}
+                                version="1.1"
+                            >
+                                <defs>
+                                    <font id="FontID0" horizAdvX="587" fontVariant="normal"
+                                          style={{fillRule: 'nonzero'}} fontStyle="normal" fontWeight="400">
+                                        <font-face fontFamily="EngraversGothic BT">
+                                            <font-face-src>
+                                                <font-face-name name="EngraversGothic BT"/>
+                                            </font-face-src>
+                                        </font-face>
+                                        <missing-glyph>
+                                            <path d="M0 0z"/>
+                                        </missing-glyph>
+                                        <glyph unicode="A" horizAdvX="587"
+                                               d="M173.834 208.001l237.332 0 -119.167 238.666 -118.165 -238.666zm-173.834 -208.001l264.167 539 55.6668 0 267.167 -539 -72.8337 0 -73.166 145 -297.834 0 -71.3348 -145 -71.8323 0z"/>
+                                    </font>
+                                    <style type="text/css">
+                                        {`
+          @font-face { 
+            font-family: "EngraversGothic BT";
+            font-variant: normal;
+            font-style: normal;
+            font-weight: normal;
+            src: url("#FontID0") format(svg);
+          }
+          .fil0 { fill: white; }
+          .fnt0 { font-weight: normal; font-size: 127.75px; font-family: 'EngraversGothic BT'; }
+        `}
+                                    </style>
+                                </defs>
+                                <g id="Layer_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"/>
+                                    <text x="0" y="68.86" className="fil0 fnt0">A</text>
+                                </g>
+                            </svg>
                         </div>
                         <div
                             className={`flex px-5 py-2 border-2 border-gray-500 rounded-xl font-bold hover:cursor-pointer ${
@@ -64,7 +110,9 @@ const Header = () => {
                         >
                             {isOpenCatalog ? (
                                 <div className="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round"
+                                         strokeLinejoin="round">
                                         <line x1="18" y1="6" x2="6" y2="18"></line>
                                         <line x1="6" y1="6" x2="18" y2="18"></line>
                                     </svg>
@@ -72,8 +120,10 @@ const Header = () => {
                                 </div>
                             ) : (
                                 <div className="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                         strokeWidth="1.5" stroke="currentColor" className="size-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
                                     </svg>
                                     <span className="ml-2">Каталог</span>
                                 </div>
@@ -81,7 +131,7 @@ const Header = () => {
                         </div>
                     </div>
                     <div className={"w-1/2 flex"}>
-                        <div className={"relative left-8 top-2"}>
+                        <div className={"relative left-8 top-2.5"}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
                             </svg>
@@ -90,7 +140,7 @@ const Header = () => {
                             type="text"
                             placeholder={"Поиск по ассортименту"}
                             onChange={(e) => location.pathname !== '/' ? setSearchValue(e.target.value) : navigate('/products')}
-                            className={"w-[80%] border-black border-2 rounded-lg text-sm px-10 py-2"}
+                            className={"w-[80%] border-black border-2 rounded-lg text-sm px-10 py-2.5"}
                         />
                     </div>
                     <div className={"w-1/3 ml-4"}>
@@ -119,7 +169,7 @@ const Header = () => {
                                     </p>
                                 )}
                             </div>
-                            <div className={"flex flex-col items-center hover:cursor-pointer"}>
+                            <div className={"flex flex-col items-center hover:cursor-pointer"} onClick={() => navigate('/favourites')}>
                                 <li className={"flex items-center"}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32.6266mm" height="26.2717mm"
                                          viewBox="0 0 150.93 121.54" className="fill-gray-600 w-8 h-8">
