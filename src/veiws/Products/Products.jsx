@@ -5,6 +5,8 @@ import { SearchContext } from '../../contexts/SearchContext';
 import Loader from '../../components/Loader';
 import { CatalogContext } from "../../contexts/CatalogContext";
 import SkeletonProduct from '../../components/SkeletonProduct';
+import ProductsSidebar from "./components/ProductsSidebar";
+import ProductHat from "./components/ProductHat";
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -14,6 +16,10 @@ const Products = () => {
     const { searchValue } = useContext(SearchContext);
     const { catalogId } = useContext(CatalogContext);
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleDropdown = () => setIsOpen(!isOpen);
+
     useEffect(() => {
         fetchProducts(currentPage);
     }, [currentPage, catalogId]);
@@ -21,7 +27,7 @@ const Products = () => {
     const fetchProducts = async (page) => {
         setLoading(true);
         try {
-            let url = `https://back.almaray.kz/api/products?page=${page}`;
+            let url = `http://127.0.0.1:8000/api/products?page=${page}`;
             if (catalogId) {
                 url += `&catalog_id=${catalogId}`;
             }
@@ -73,21 +79,30 @@ const Products = () => {
     };
 
     return (
-        <div className="w-full flex flex-col items-center justify-center">
-            <div className="w-4/5 grid grid-cols-3 gap-4">
-                {loading
-                    ? Array.from({ length: 9 }).map((_, index) => <SkeletonProduct key={index} />)
-                    : filteredProducts.map(product => (
-                        <Product key={product.id} product={product} />
-                    ))}
-            </div>
-            {loading && <Loader />}
-            <div className="flex justify-center my-4">
-                <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                    {renderPageNumbers()}
-                </nav>
+        <div>
+            {/*<ProductHat toggleDropdown={toggleDropdown} isOpen={isOpen}/>*/}
+            <div className={"flex w-full"}>
+                <ProductsSidebar/>
+                <div className="w-full flex flex-col items-center justify-center">
+                    <div className="w-4/5 grid grid-cols-4 gap-4">
+                        {loading
+                            ? Array.from({length: 9}).map((_, index) => <SkeletonProduct key={index}/>)
+                            : filteredProducts.map(product => (
+                                <Product key={product.id} product={product}/>
+                            ))}
+                    </div>
+                    {loading && <Loader/>}
+                    <div className="flex justify-center my-4">
+                        <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+                             aria-label="Pagination">
+                            {renderPageNumbers()}
+                        </nav>
+                    </div>
+                </div>
+
             </div>
         </div>
+
     );
 };
 

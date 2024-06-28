@@ -125,7 +125,7 @@ const Header = () => {
                                         <path strokeLinecap="round" strokeLinejoin="round"
                                               d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
                                     </svg>
-                                    <span className="ml-2">Каталог</span>
+                                    <span className="ml-2 text-lg">Каталог</span>
                                 </div>
                             )}
                         </div>
