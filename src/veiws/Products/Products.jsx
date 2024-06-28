@@ -77,7 +77,7 @@ const Products = () => {
             </button>
         ));
     };
-
+    // Array.from({length: 9}).map((_, index) => <SkeletonProduct key={index}/>)
     return (
         <div>
             <ProductHat toggleDropdown={toggleDropdown} isOpen={isOpen}/>
@@ -86,7 +86,7 @@ const Products = () => {
                 <div className="w-full flex flex-col items-center justify-center">
                     <div className="w-4/5 grid grid-cols-4 gap-4">
                         {loading
-                            ? Array.from({length: 9}).map((_, index) => <SkeletonProduct key={index}/>)
+                            ? <Loader/>
                             : filteredProducts.map(product => (
                                 <Product key={product.id} product={product}/>
                             ))}

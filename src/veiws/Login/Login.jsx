@@ -54,7 +54,6 @@ const Login = () => {
 
     return (
         <div className="w-full h-96 flex items-center justify-center">
-            <ToastContainer className="reset" />
 
             <div className="w-4/5 flex">
                 {sended === false ? (

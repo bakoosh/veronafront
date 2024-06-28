@@ -91,8 +91,6 @@ const ChooseCity = () => {
                 <FaLocationDot/>
                 <span className={"ml-2 mt-1 hover:cursor-pointer"}>Определить город автоматический</span>
             </div>
-            <ToastContainer className="reset" />
-
 
         </>
     );

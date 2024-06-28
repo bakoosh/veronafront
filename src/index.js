@@ -11,6 +11,7 @@ import ModalProvider from "./contexts/ModalContext";
 import CityProvider from "./contexts/CityContext";
 import FavouriteProvider from "./contexts/FavouriteContext";
 import BasketProvider from "./contexts/BasketContext";
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

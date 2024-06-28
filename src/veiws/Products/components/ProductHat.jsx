@@ -53,8 +53,10 @@ const ProductHat = ({isOpen , toggleDropdown}) => {
                 </div>
             </div>
 
-            <div className={"w-full flex"}>
-                <div className={"w-1/6 bg-black"}></div>
+            <div className={"w-full flex mt-5"}>
+                <div className={"w-4/5"}>
+
+                </div>
             </div>
         </div>
     );

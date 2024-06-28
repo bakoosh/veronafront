@@ -20,6 +20,7 @@ import {CityContext} from "./contexts/CityContext";
 import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Basket from "./veiws/Basket/Basket";
+import ProductInfo from "./veiws/ProductInfo/ProductInfo";
 
 
 function App() {
@@ -58,7 +59,17 @@ function App() {
 
   return (
     <div className="App">
-        <ToastContainer autoClose={3000} position="top-right" style={{ zIndex: 9999 }} />
+        <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={true}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+        />
 
         <ModalComponent
             isOpen={isOpen}
@@ -76,6 +87,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/products" element={<Products/>}/>
+                    <Route path="/products/:id" element={<ProductInfo/>}/>
                     <Route
                         path="/favourites"
                         element={
