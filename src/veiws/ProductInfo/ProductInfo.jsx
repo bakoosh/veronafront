@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useParams} from "react-router-dom";
 import axios from "axios";
+import {toast} from "react-toastify";
 
 const ProductInfo = () => {
     const {id} = useParams();
@@ -10,9 +11,39 @@ const ProductInfo = () => {
             setProduct(response.data)
         })
     }, []);
-    console.log(product)
+
+
+    const handleClick = async (product_id) => {
+        console.log(product_id)
+        try {
+            toast.success('Добавлено в избранное');
+            const response = await axios.post('http://127.0.0.1:8000/api/favourites', {
+                product_id: product_id
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error:', error);
+            toast.error("Чтобы добавлять товар в избранное нужно вторизоваться!!");
+        }
+    };
+
+    const handleBasketClick = async (product_id) => {
+        try {
+            toast.success('Добавлено в корзину');
+            const response = await axios.post('http://127.0.0.1:8000/api/basket', {
+                product_id: product_id,
+                quantity: 1 ,
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error:', error);
+            toast.error("Чтобы добавлять товар в корзину нужно авторизоваться!!");
+        }
+    }
+
+
     return (
-        <div className={"flex items-center justify-between"}>
+        <div className={"flex items-center justify-between m-10"}>
             <div className={"w-1/2"}>
                 <div className={"w-2/3 flex items-center justify-center mx-10 my-10"}>
                     <img src="/catalogImages/браслеты.png" alt=""/>
@@ -47,9 +78,9 @@ const ProductInfo = () => {
                 </div>
 
                 <div className={"flex items-center mt-5"}>
-                    <button className={"bg-gray-500 text-amber-50 font-bold text-md py-6 px-5 rounded-xl"}>Добавить в корзину
+                    <button onClick={() => handleBasketClick(product.id)} className={"hover:cursor-pointer bg-gray-500 text-amber-50 font-bold text-md py-6 px-5 rounded-xl hover:text-gray-400 hover:transition  "}>Добавить в корзину
                     </button>
-                    <div className={"bg-gray-500 ml-4 py-5 px-5 rounded-xl"}>
+                    <div onClick={() => handleClick(product.id)} className={"bg-gray-500 ml-4 py-5 px-5 rounded-xl"}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="32.6266mm"
                              height="26.2717mm"
                              viewBox="0 0 150.93 121.54"

@@ -24,8 +24,8 @@ const Header = () => {
         <>
             <header className={"w-full flex items-center justify-center flex-col"}>
                 <div className={'w-4/5 items-center flex py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[50px] tracking-wide relative z-50'}>
-                    <div className={"min-w-1/6 text-gray-700 flex items-center"}>
-                        <FaLocationDot />
+                        <div className={"min-w-1/6 text-gray-700 flex items-center"}>
+                        <FaLocationDot className={"-mt-1"}/>
                         {
                             city.length ? (
                                 <span className={"text-md ml-1 hover:cursor-pointer"} onClick={() => setIsOpen(!isOpen)}>
@@ -49,58 +49,12 @@ const Header = () => {
                     </div>
                 </div>
                 <div className={'w-4/5 items-center flex border-b py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'}>
-                    <div className={"w-1/6 flex items-center justify-around"}>
+                    <div className={"w-1/6 flex items-center"}>
                         <div
-                            className={"size-11 flex items-center justify-center bg-gray-500 rounded-lg mr-4 hover:cursor-pointer"}
+                            className={"size-11 text-amber-50 text-3xl flex items-center justify-center bg-gray-500 rounded-lg mr-4 hover:cursor-pointer"}
                             onClick={() => navigate('/')}
                         >
-                            <svg
-                                width="27.3756mm"
-                                className={"size-6"}
-                                height="25.137mm"
-                                viewBox="0 0 74.99 68.86"
-                                style={{
-                                    shapeRendering: 'geometricPrecision',
-                                    textRendering: 'geometricPrecision',
-                                    imageRendering: 'optimizeQuality',
-                                    fillRule: 'evenodd',
-                                    clipRule: 'evenodd'
-                                }}
-                                version="1.1"
-                            >
-                                <defs>
-                                    <font id="FontID0" horizAdvX="587" fontVariant="normal"
-                                          style={{fillRule: 'nonzero'}} fontStyle="normal" fontWeight="400">
-                                        <font-face fontFamily="EngraversGothic BT">
-                                            <font-face-src>
-                                                <font-face-name name="EngraversGothic BT"/>
-                                            </font-face-src>
-                                        </font-face>
-                                        <missing-glyph>
-                                            <path d="M0 0z"/>
-                                        </missing-glyph>
-                                        <glyph unicode="A" horizAdvX="587"
-                                               d="M173.834 208.001l237.332 0 -119.167 238.666 -118.165 -238.666zm-173.834 -208.001l264.167 539 55.6668 0 267.167 -539 -72.8337 0 -73.166 145 -297.834 0 -71.3348 -145 -71.8323 0z"/>
-                                    </font>
-                                    <style type="text/css">
-                                        {`
-          @font-face { 
-            font-family: "EngraversGothic BT";
-            font-variant: normal;
-            font-style: normal;
-            font-weight: normal;
-            src: url("#FontID0") format(svg);
-          }
-          .fil0 { fill: white; }
-          .fnt0 { font-weight: normal; font-size: 127.75px; font-family: 'EngraversGothic BT'; }
-        `}
-                                    </style>
-                                </defs>
-                                <g id="Layer_1">
-                                    <metadata id="CorelCorpID_0Corel-Layer"/>
-                                    <text x="0" y="68.86" className="fil0 fnt0">A</text>
-                                </g>
-                            </svg>
+                        A
                         </div>
                         <div
                             className={`flex px-5 py-2 border-2 border-gray-500 rounded-xl font-bold hover:cursor-pointer ${
