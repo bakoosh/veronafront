@@ -80,7 +80,7 @@ const Products = () => {
 
     return (
         <div>
-            {/*<ProductHat toggleDropdown={toggleDropdown} isOpen={isOpen}/>*/}
+            <ProductHat toggleDropdown={toggleDropdown} isOpen={isOpen}/>
             <div className={"flex w-full"}>
                 <ProductsSidebar/>
                 <div className="w-full flex flex-col items-center justify-center">
