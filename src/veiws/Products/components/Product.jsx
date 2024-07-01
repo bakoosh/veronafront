@@ -38,14 +38,14 @@ const Product = ({ product }) => {
 
     return (
         <div className="pl-3 pt-3 mt-4 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700 transition-transform duration-300 transform hover:scale-95">
-            <div className="w-full h-[50%] flex items-center justify-center">
-                <a className="w-4/5 h-5/6">
+            <div className="w-full h-[50%] flex items-center justify-center hover:cursor-pointer">
+                <a className="w-4/5 h-5/6 ">
                     <img className="rounded-t-lg" src="/catalogImages/браслеты.png" alt={product.name}  onClick={() => navigate(`/products/${product.id}`)}/>
                 </a>
             </div>
             <div className="pt-5 mt-5">
                 <div className="flex items-center justify-between px-3">
-                    <span className="font-bold text-2xl">{product.price * product.average_weight} тг</span>
+                    <span className="font-bold text-2xl">{product.price} тг</span>
                     <div className="flex">
                         <svg onClick={() => handleClick(product.id)} xmlns="http://www.w3.org/2000/svg" width="32.6266mm" height="26.2717mm"
                              viewBox="0 0 150.93 121.54" className="fill-gray-600 w-6 h-6 hover:cursor-pointer  transition-transform duration-300 transform hover:scale-125">

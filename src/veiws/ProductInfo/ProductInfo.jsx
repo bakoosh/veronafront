@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {toast} from "react-toastify";
 import Product from "../Products/components/Product";
@@ -8,6 +8,8 @@ const ProductInfo = () => {
     const {id} = useParams();
     const [product, setProduct] = React.useState([]);
     const [products, setProducts] = React.useState([]);
+    const navigate = useNavigate();
+
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api/products/${id}`).then(response => {
             setProduct(...response.data)
@@ -20,7 +22,6 @@ const ProductInfo = () => {
         })
     }, []);
 
-    console.log(product)
 
 
     const handleClick = async (product_id) => {
@@ -50,6 +51,7 @@ const ProductInfo = () => {
             toast.error("Чтобы добавлять товар в корзину нужно авторизоваться!!");
         }
     }
+
 
 
     return (
@@ -122,7 +124,30 @@ const ProductInfo = () => {
                 <div className={"w-full flex p-10"}>
                     {
                         products && products.map(item => (
-                            <Product product={item}/>
+                            <div
+                                className="pl-3 pt-3 mt-4 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700 transition-transform duration-300 transform hover:scale-95">
+                                <div className="w-full h-[50%] flex items-center justify-center hover:cursor-pointer">
+                                    <a className="w-4/5 h-5/6 ">
+                                        <img className="rounded-t-lg" src="/catalogImages/браслеты.png" alt={item.product_name}
+                                             onClick={() => navigate(`/products/${item.id}`)}/>
+                                    </a>
+                                </div>
+                                <div className="pt-5 mt-10">
+                                    <div className="flex items-center justify-between px-3">
+                                        <span
+                                            className="font-bold text-2xl">{item.price * item.average_weight} тг</span>
+
+
+                                    </div>
+                                    <div className="w-full">
+                                        <h1 className="ml-3 text-xl flex items-start">{item.insert}</h1>
+                                        <h1 className="ml-3 text-xl flex items-start">{item.sample} пробы</h1>
+                                        <span
+                                            className="flex items-start ml-3 text-sm text-gray-400 mb-8">Арт. {item.vendor}</span>
+                                    </div>
+                                </div>
+
+                            </div>
                         ))
                     }
                 </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductHat = ({ isOpen, toggleDropdown, products }) => {
+const ProductHat = ({ isOpen, toggleDropdown, products, sort, setSort }) => {
     const catalogName = products && products.length > 1 ? products[0].catalog_name : '';
 
     return (
@@ -37,16 +37,16 @@ const ProductHat = ({ isOpen, toggleDropdown, products }) => {
                     {isOpen && (
                         <div className="origin-top-right absolute right-0 mt-2 border-2 border-gray-400 w-56 rounded-xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-40">
                             <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                                <button className="block px-4 py-2 text-sm text-gray-700 w-full text-left" role="menuitem">
+                                <button className="block px-4 py-2 text-sm text-gray-700 w-full text-left" role="menuitem" onClick={() => setSort('popularity')}>
                                     По популярности
                                 </button>
-                                <button className="block px-4 py-2 text-sm text-gray-700 w-full text-left" role="menuitem">
+                                <button className="block px-4 py-2 text-sm text-gray-700 w-full text-left" role="menuitem" onClick={() => setSort('new')}>
                                     Новинки
                                 </button>
-                                <button className="block px-4 py-2 text-sm text-gray-700 w-full text-left" role="menuitem">
+                                <button className="block px-4 py-2 text-sm text-gray-700 w-full text-left" role="menuitem" onClick={() => setSort('price_asc')}>
                                     По возрастанию цены
                                 </button>
-                                <button className="block px-4 py-2 text-sm text-gray-700 w-full text-left" role="menuitem">
+                                <button className="block px-4 py-2 text-sm text-gray-700 w-full text-left" role="menuitem" onClick={() => setSort('price_desc')}>
                                     По убыванию цены
                                 </button>
                             </div>

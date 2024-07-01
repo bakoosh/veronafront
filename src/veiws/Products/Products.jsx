@@ -11,6 +11,7 @@ import ProductHat from "./components/ProductHat";
 const Products = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [sort, setSort] = useState('')
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const { searchValue } = useContext(SearchContext);
@@ -22,7 +23,7 @@ const Products = () => {
 
     useEffect(() => {
         fetchProducts(currentPage);
-    }, [currentPage, catalogId]);
+    }, [currentPage, catalogId, sort]);
 
     const fetchProducts = async (page) => {
         setLoading(true);
@@ -31,7 +32,9 @@ const Products = () => {
             if (catalogId) {
                 url += `&catalog_id=${catalogId}`;
             }
-
+            if (sort) {
+                url += `&sort=${sort}`;
+            }
             const response = await axios.get(url);
             if (response.data && response.data.data) {
                 setProducts(response.data.data);
@@ -80,7 +83,7 @@ const Products = () => {
     // Array.from({length: 9}).map((_, index) => <SkeletonProduct key={index}/>)
     return (
         <div>
-            <ProductHat toggleDropdown={toggleDropdown} isOpen={isOpen} products={products}/>
+            <ProductHat toggleDropdown={toggleDropdown} isOpen={isOpen} products={products} sort={sort} setSort={setSort}/>
             <div className={"flex w-full"}>
                 <ProductsSidebar/>
                 <div className="w-full flex flex-col items-center justify-center">
