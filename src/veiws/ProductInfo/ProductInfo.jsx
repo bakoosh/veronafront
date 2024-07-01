@@ -6,11 +6,11 @@ import Product from "../Products/components/Product";
 
 const ProductInfo = () => {
     const {id} = useParams();
-    const [product, setProduct] = React.useState('');
+    const [product, setProduct] = React.useState([]);
     const [products, setProducts] = React.useState([]);
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/api/products/${id}`).then(response => {
-            setProduct(response.data)
+            setProduct(...response.data)
         })
     }, [id]);
 
@@ -20,7 +20,7 @@ const ProductInfo = () => {
         })
     }, []);
 
-    console.log(products)
+    console.log(product)
 
 
     const handleClick = async (product_id) => {
@@ -61,7 +61,7 @@ const ProductInfo = () => {
                     </div>
                 </div>
                 <div className={"w-[40%]"}>
-                    <h1 className={"text-4xl font-bold text-gray-500 flex items-start"}>{product.name}</h1>
+                    <h1 className={"text-4xl font-bold text-gray-500 flex items-start"}>{product.product_name}</h1>
                     <span className={"font-bold text-gray-500 text-3xl flex items-start"}>{product.sample} проба</span>
 
                     <div className={"mt-5"}>
@@ -75,11 +75,17 @@ const ProductInfo = () => {
                         <div className={"w-full bg-blue-50 text-3xl text-gray-500 flex items-start py-1 px-2 mt-1"}>
                             {product.average_weight} гр
                         </div>
+
+                        <h1 className={"text-2xl font-bold text-gray-500 flex items-start mt-5"}>Цена за грамм</h1>
+                        <div className={"w-full bg-blue-50 text-3xl text-gray-500 flex items-start py-1 px-2 mt-1"}>
+                            {product.price} тг
+                        </div>
                     </div>
 
                     <div className={"flex items-center mt-5"}>
                         <h1 className={"text-2xl font-bold text-gray-500 flex items-start"}>Вставки</h1>
-                        <span className={"ml-7 text-gray-500 text-2xl"}>{product.insert ? `( ${product.insert} )` : 'Не указано'}</span>
+                        <span
+                            className={"ml-7 text-gray-500 text-2xl"}>{product.insert ? `( ${product.insert} )` : 'Не указано'}</span>
                     </div>
 
 
@@ -88,6 +94,7 @@ const ProductInfo = () => {
                         <span
                             className={"ml-7 text-gray-500 text-2xl"}>{product.size ? product.size : 'Размер не указан'}</span>
                     </div>
+
 
                     <div className={"flex items-center mt-5"}>
                         <button onClick={() => handleBasketClick(product.id)}
@@ -112,13 +119,14 @@ const ProductInfo = () => {
 
             <div className={"w-full h-[40%]"}>
                 <h1 className={"text-gray-400 text-4xl mt-5"}>Может понравиться</h1>
-                <div className={"grid grid-cols-4 gap-4"}>
+                <div className={"w-full flex p-10"}>
                     {
-                        products.map(product => {
-                            <Product product={product} key={product.uuid} />
-                        })
+                        products && products.map(item => (
+                            <Product product={item}/>
+                        ))
                     }
                 </div>
+
             </div>
         </div>
 
