@@ -80,7 +80,7 @@ const Products = () => {
     // Array.from({length: 9}).map((_, index) => <SkeletonProduct key={index}/>)
     return (
         <div>
-            <ProductHat toggleDropdown={toggleDropdown} isOpen={isOpen}/>
+            <ProductHat toggleDropdown={toggleDropdown} isOpen={isOpen} products={products}/>
             <div className={"flex w-full"}>
                 <ProductsSidebar/>
                 <div className="w-full flex flex-col items-center justify-center">

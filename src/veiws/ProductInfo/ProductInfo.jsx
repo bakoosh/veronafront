@@ -16,7 +16,7 @@ const ProductInfo = () => {
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/products/random').then(response => {
-            setProducts(response.data);
+                setProducts(response.data);
         })
     }, []);
 
@@ -79,7 +79,7 @@ const ProductInfo = () => {
 
                     <div className={"flex items-center mt-5"}>
                         <h1 className={"text-2xl font-bold text-gray-500 flex items-start"}>Вставки</h1>
-                        <span className={"ml-7 text-gray-500 text-2xl"}>( {product.insert} )</span>
+                        <span className={"ml-7 text-gray-500 text-2xl"}>{product.insert ? `( ${product.insert} )` : 'Не указано'}</span>
                     </div>
 
 
@@ -110,15 +110,14 @@ const ProductInfo = () => {
             </div>
 
 
-            <div className={"w-full h-1/3"}>
+            <div className={"w-full h-[40%]"}>
                 <h1 className={"text-gray-400 text-4xl mt-5"}>Может понравиться</h1>
-
                 <div className={"grid grid-cols-4 gap-4"}>
-                    {/*{*/}
-                    {/*    product.map(product => {*/}
-                    {/*        <Product product={product} key={product.id} />*/}
-                    {/*    })*/}
-                    {/*}*/}
+                    {
+                        products.map(product => {
+                            <Product product={product} key={product.uuid} />
+                        })
+                    }
                 </div>
             </div>
         </div>

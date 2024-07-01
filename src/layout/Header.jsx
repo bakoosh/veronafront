@@ -1,15 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import { SearchContext } from "../contexts/SearchContext";
-import {useLocation, useNavigate} from "react-router-dom";
-import { TbLetterA } from "react-icons/tb";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
 import { AuthUserContext } from "../contexts/AuthUserContext";
 import { CatalogContext } from "../contexts/CatalogContext";
 import { ModalContext } from "../contexts/ModalContext";
 import { CityContext } from "../contexts/CityContext";
+import Product from "../veiws/Products/components/Product";
+import axios from "axios";
+import product from "../veiws/Products/components/Product";
 
 const Header = () => {
-    const { setSearchValue } = useContext(SearchContext);
+
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/api/products').then((response) => {
+            setProducts(response.data.data);
+        })
+    }, []);
+
+    const { searchValue, setSearchValue } = useContext(SearchContext);
     const navigate = useNavigate();
     const { authUser } = useContext(AuthUserContext);
     const { isOpenCatalog, setIsOpenCatalog } = useContext(CatalogContext);
@@ -17,6 +26,28 @@ const Header = () => {
     const { isOpen, setIsOpen } = useContext(ModalContext);
     const location = useLocation();
 
+    const [products, setProducts] = useState([]);
+    const [filteredSuggestions, setFilteredSuggestions] = useState([]);
+    const inputRef = useRef(null);
+
+
+    useEffect(() => {
+        inputRef.current.focus();
+    }, []);
+
+    const handleInputChange = (e) => {
+        const value = e.target.value;
+        setSearchValue(value);
+        if (value.trim() === '') {
+            setFilteredSuggestions([]);
+        } else {
+            setFilteredSuggestions(
+                products.filter(product =>
+                    product.name.toLowerCase().includes(value.toLowerCase())
+                )
+            );
+        }
+    };
 
     const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
 
@@ -24,19 +55,17 @@ const Header = () => {
         <>
             <header className={"w-full flex items-center justify-center flex-col"}>
                 <div className={'w-4/5 items-center flex py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[50px] tracking-wide relative z-50'}>
-                        <div className={"min-w-1/6 text-gray-700 flex items-center"}>
+                    <div className={"min-w-1/6 text-gray-700 flex items-center"}>
                         <FaLocationDot className={"-mt-1"}/>
-                        {
-                            city.length ? (
-                                <span className={"text-md ml-1 hover:cursor-pointer"} onClick={() => setIsOpen(!isOpen)}>
-                                    {city}
-                                </span>
-                            ) : (
-                                <span className={"text-sm ml-1 hover:cursor-pointer"} onClick={() => setIsOpen(!isOpen)}>
-                                    Выберите
-                                </span>
-                            )
-                        }
+                        {city.length ? (
+                            <span className={"text-md ml-1 hover:cursor-pointer"} onClick={() => setIsOpen(!isOpen)}>
+                                {city}
+                            </span>
+                        ) : (
+                            <span className={"text-sm ml-1 hover:cursor-pointer"} onClick={() => setIsOpen(!isOpen)}>
+                                Выберите
+                            </span>
+                        )}
                         <div className={"flex justify-center"}>
                             <span className={"ml-4 text-sm"}>{user ? user.phone : ''}</span>
                         </div>
@@ -48,13 +77,14 @@ const Header = () => {
                         <a href="#" className="text-gray-500 text-md font-bold">Доставка и оплата</a>
                     </div>
                 </div>
-                <div className={'w-4/5 items-center flex border-b py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'}>
+                <div
+                    className={'w-4/5 items-center flex border-b py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'}>
                     <div className={"w-1/6 flex items-center"}>
                         <div
                             className={"size-11 text-amber-50 text-3xl flex items-center justify-center bg-gray-500 rounded-lg mr-4 hover:cursor-pointer"}
                             onClick={() => navigate('/')}
                         >
-                        A
+                            A
                         </div>
                         <div
                             className={`flex px-5 py-2 border-2 border-gray-500 rounded-xl font-bold hover:cursor-pointer ${
@@ -84,22 +114,58 @@ const Header = () => {
                             )}
                         </div>
                     </div>
-                    <div className={"w-1/2 flex"}>
+                    <div className={"w-1/2 flex relative"}>
                         <div className={"relative left-8 top-2.5"}>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                                 stroke="currentColor" className="size-6">
+                                <path strokeLinecap="round" strokeLinejoin="round"
+                                      d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
                             </svg>
                         </div>
-                        <input
-                            type="text"
-                            placeholder={"Поиск по ассортименту"}
-                            onChange={(e) => location.pathname !== '/' ? setSearchValue(e.target.value) : navigate('/products')}
-                            className={"w-[80%] border-black border-2 rounded-lg text-sm px-10 py-2.5"}
-                        />
+                        {
+                            location.pathname !== '/products' || '/favourites' || '/basket' ? (<input
+                                    type="text"
+                                    placeholder={"Поиск по ассортименту"}
+                                    value={searchValue}
+                                    onChange={handleInputChange}
+                                    ref={inputRef}
+                                    className={"w-[100%] border-black border-2 rounded-lg text-sm px-10 py-2.5 focus:bg-gray-100"}
+                                /> ): (
+                                <input
+                                    type="text"
+                                    placeholder={"Поиск по ассортименту"}
+                                    onChange={(e) => location.pathname !== '/' ? setSearchValue(e.target.value) : navigate('/products')}
+                                    className={"w-[80%] border-black border-2 rounded-lg text-sm px-10 py-2.5"}
+                                />)
+                        }
+
                     </div>
+
+
+                    {location.pathname !== '/products' && location.pathname !== '/favourites' && location.pathname !== '/basket' && filteredSuggestions.length > 0 && (
+                        <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-40 p-10">
+                            <div className="flex w-full">
+                                {filteredSuggestions.slice(0, 4).map((product, index) => (
+                                    <div
+                                        className="w-1/3 min-h-[200px] hover:cursor-pointer transition-transform duration-300 transform hover:scale-95"
+                                        key={index}
+                                    >
+                                        <div className="w-full h-[70%]">
+                                            <img src="/catalogImages/браслеты.png" alt="" className="py-5 px-5"/>
+                                        </div>
+                                        <div className="w-full h-[30%] flex items-center justify-center mt-5">
+                                            <span className="font-bold text-sm">{product.name}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
                     <div className={"w-1/3 ml-4"}>
                         <ul className={"list-none flex items-center justify-around"}>
-                            <div className={"flex flex-col items-center hover:cursor-pointer"} onClick={() => navigate(`${authUser ? '/me' : '/login'}`)}>
+                            <div className={"flex flex-col items-center hover:cursor-pointer"}
+                                 onClick={() => navigate(`${authUser ? '/me' : '/login'}`)}>
                                 <li className={"flex items-center"}>
                                     <svg className="w-8 h-8 text-gray-600" viewBox="0 0 87.92 112.76">
                                         <g>
@@ -119,36 +185,29 @@ const Header = () => {
                                 ) : (
                                     <p className={"text-sm hover:cursor-pointer text-gray-400"}
                                        onClick={() => navigate('/login')}>
-                                    Войти
+                                        Войти
                                     </p>
                                 )}
                             </div>
-                            <div className={"flex flex-col items-center hover:cursor-pointer"} onClick={() => navigate('/favourites')}>
+                            <div className={"flex flex-col items-center hover:cursor-pointer"}
+                                 onClick={() => navigate('/favourites')}>
                                 <li className={"flex items-center"}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32.6266mm" height="26.2717mm"
-                                         viewBox="0 0 150.93 121.54" className="fill-gray-600 w-8 h-8">
-                                        <path
-                                            d="M75.47 121.54c-3.94,0 -7.89,-1.52 -10.9,-4.52l-53.71 -53.71c-14.49,-14.48 -14.49,-37.96 0,-52.44 7.22,-7.27 16.75,-10.88 26.23,-10.88 9.48,0 19.01,3.6 26.23,10.88l12.14 12.11 11.48 -11.48c7.44,-7.45 17.37,-11.26 27.21,-11.26 9.35,0 18.65,3.43 25.79,10.45 7.36,7.27 10.99,16.81 10.99,26.41 0,9.46 -3.59,18.96 -10.86,26.2l-53.71 53.71c-3.01,3 -6.96,4.52 -10.9,4.52z"/>
+                                    <svg className="w-7 h-7 text-gray-600" viewBox="0 0 121.9 107.5">
+                                        <path className="fill-current"
+                                              d="M88.4 0c-15.7 0-29 8.1-37.4 20.3C42.6 8.1 29.2 0 13.5 0 5.2 0 0 2.4 0 2.4v35.1c0 47.2 51 69.9 51 69.9 5.6 2.8 11.9 0 11.9 0 51-25.2 59.1-65.1 59.1-65.1V2.4s-3.6-2.4-11.9-2.4z"/>
                                     </svg>
                                 </li>
-                                <p className={"text-sm hover:cursor-pointer text-gray-400"}
-                                   onClick={() => navigate('/favourites')}>
-                                    Избранное
-                                </p>
+                                <p className={"text-sm hover:cursor-pointer text-gray-400"}>Избранное</p>
                             </div>
-                            <div className={"flex flex-col items-center hover:cursor-pointer"} onClick={() => navigate('/basket')}>
+                            <div className={"flex flex-col items-center hover:cursor-pointer"}
+                                 onClick={() => navigate('/basket')}>
                                 <li className={"flex items-center"}>
-                                    <svg className="w-8 h-8 text-gray-600" viewBox="0 0 77.18 72.55">
-                                    <g>
-                                            <path className="fill-current"
-                                                  d="M0 2.58c0 4.84 5.11 2.68 8.03 3.37 0.83 0.2 1.1 0.47 1.58 0.99 0.48 0.52 0.61 1.1 0.85 1.88 2.86 9.45 5.45 19.66 8.26 28.95 0.85 2.8 1.51 5.49 2.37 8.34 0.73 2.42 1.52 6.09 2.69 7.84 1.21 1.82 3.98 3.82 7.02 3.82h33.21c1.68 0 3.3-0.82 4.38-1.51 3.15-2.04 3.52-4.69 4.17-7.85l3.77-20.14c0.64-3.3 1.82-6.26-0.63-7.66-1.19-0.68-9.04-0.35-10.77-0.35-14.9 0-29.81 0-44.71 0-1.04-2.1-3.57-13.87-5.46-16.52-0.83-1.16-1.94-2.14-3.25-2.79-2.6-1.29-5.58-0.9-8.91-0.9-1.16 0-2.6 1.4-2.6 2.53zm50.46 63.82c0 6.29 6.84 7.7 10.16 4.47 3.32-3.23 1.87-9.88-4.6-9.88-2.86 0-5.57 2.63-5.57 5.41zm-17.81 0c0 6.29 6.84 7.7 10.16 4.47 3.32-3.23 1.87-9.88-4.6-9.88-2.86 0-5.57 2.63-5.57 5.41z"/>
-                                        </g>
+                                    <svg className="w-7 h-7 text-gray-600" viewBox="0 0 122.88 115.51">
+                                        <path className="fill-current"
+                                              d="M108.26,90.35H34.29L33.36,96.11c-0.86,4.89-5.87,8.73-10.88,8.73H10.88C4.87,104.84,0,100.32,0,94.79 c0-5.45,4.65-9.88,10.38-9.88h6.25L26.95,9.74H7.78c-4.61,0-7.78-3.3-7.78-7.19C0,3.26,3.16,0,7.78,0h21.65 c3.42,0,7.36,3.12,7.36,6.76h69.32c3.7,0,6.34,3.1,5.74,6.76l-10.91,61.48c-0.72,4.04-4.77,7.38-8.86,7.38H37.96L36.97,82.2h66.35 c3.7,0,6.69,3.41,6.09,7.07l-0.06,0.36C108.91,89.1,108.64,90.35,108.26,90.35L108.26,90.35z M38.88,114.36 c-4.61,0-8.36-3.43-8.36-7.66c0-4.23,3.75-7.66,8.36-7.66c4.61,0,8.36,3.43,8.36,7.66C47.24,110.93,43.49,114.36,38.88,114.36 L38.88,114.36z M103.99,114.36c-4.61,0-8.36-3.43-8.36-7.66c0-4.23,3.75-7.66,8.36-7.66c4.61,0,8.36,3.43,8.36,7.66 C112.35,110.93,108.6,114.36,103.99,114.36L103.99,114.36z"/>
                                     </svg>
-
                                 </li>
-                                <p className={"text-sm text-gray-400"}>
-                                    Корзина
-                                </p>
+                                <p className={"text-sm hover:cursor-pointer text-gray-400"}>Корзина</p>
                             </div>
                         </ul>
                     </div>

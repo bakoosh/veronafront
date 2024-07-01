@@ -12,7 +12,7 @@ const CatalogProvider = ({ children }) => {
         setIsOpenCatalog,
         catalogId,
         setCatalogId,
-    }), [isOpenCatalog, catalogId])
+    }), [isOpenCatalog, catalogId ])
 
     return (
         <CatalogContext.Provider value={defaultProps}>

@@ -9,7 +9,7 @@ const Catalog = () => {
     const [catalogs, setCatalogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    const { catalogId, setCatalogId, isOpenCatalog, setIsOpenCatalog } = useContext(CatalogContext);
+    const { catalogId, setCatalogId, isOpenCatalog, setIsOpenCatalog} = useContext(CatalogContext);
 
     const golds = [
         'Желтое золото',
