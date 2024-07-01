@@ -21,6 +21,7 @@ import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Basket from "./veiws/Basket/Basket";
 import ProductInfo from "./veiws/ProductInfo/ProductInfo";
+import { motion, AnimatePresence } from 'framer-motion';
 
 
 function App() {
@@ -78,11 +79,19 @@ function App() {
         />
         <Header/>
         <div className="container mx-auto px-4">
-            {isOpenCatalog && (
-                <div className="absolute top-[70px] left-0 w-full bg-white z-40 shadow-md">
-                    <Catalog />
-                </div>
-            )}
+            <AnimatePresence>
+                {isOpenCatalog && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute top-[70px] left-0 w-full bg-white z-40 shadow-md"
+                    >
+                        <Catalog />
+                    </motion.div>
+                )}
+            </AnimatePresence>
             <div className={"flex"}>
                 <Routes>
                     <Route path="/" element={<Main/>}/>

@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import axios from "axios";
 import {toast, ToastContainer} from "react-toastify";
 import {useNavigate} from "react-router-dom";
+import { motion } from 'framer-motion';
 
 const Product = ({ product }) => {
     const navigate = useNavigate();
@@ -37,13 +38,18 @@ const Product = ({ product }) => {
 
 
     return (
-        <div className="pl-3 pt-3 mt-4 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700 transition-transform duration-300 transform hover:scale-95">
-            <div className="w-full h-[50%] flex items-center justify-center hover:cursor-pointer">
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+        >
+        <div className="pl-3 pt-3 mt-4 bg-white rounded-xl dark:bg-gray-800 dark:border-gray-700 transition-transform duration-300 transform hover:scale-95">
+            <div className="w-full h-[80%] rounded-2xl flex items-center justify-center hover:cursor-pointer bg-gray-100">
                 <a className="w-4/5 h-5/6 ">
                     <img className="rounded-t-lg" src="/catalogImages/браслеты.png" alt={product.name}  onClick={() => navigate(`/products/${product.id}`)}/>
                 </a>
             </div>
-            <div className="pt-5 mt-5">
+            <div className="pt-5">
                 <div className="flex items-center justify-between px-3">
                     <span className="font-bold text-2xl">{product.price} тг</span>
                     <div className="flex">
@@ -68,6 +74,7 @@ const Product = ({ product }) => {
             </div>
 
         </div>
+        </motion.div>
     );
 };
 

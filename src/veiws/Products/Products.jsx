@@ -23,6 +23,7 @@ const Products = () => {
 
     useEffect(() => {
         fetchProducts(currentPage);
+        setIsOpen(false)
     }, [currentPage, catalogId, sort]);
 
     const fetchProducts = async (page) => {
