@@ -44,6 +44,7 @@ const Catalog = () => {
 
     const handleGoldClick = () => {
         navigate('/products');
+        setCatalogId(null)
         setIsOpenCatalog(!isOpenCatalog);
 
     }

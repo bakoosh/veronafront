@@ -12,7 +12,7 @@ const ProductInfo = () => {
         axios.get(`http://127.0.0.1:8000/api/products/${id}`).then(response => {
             setProduct(response.data)
         })
-    }, []);
+    }, [id]);
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/products/random').then(response => {

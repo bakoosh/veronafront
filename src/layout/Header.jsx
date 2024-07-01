@@ -6,9 +6,7 @@ import { AuthUserContext } from "../contexts/AuthUserContext";
 import { CatalogContext } from "../contexts/CatalogContext";
 import { ModalContext } from "../contexts/ModalContext";
 import { CityContext } from "../contexts/CityContext";
-import Product from "../veiws/Products/components/Product";
 import axios from "axios";
-import product from "../veiws/Products/components/Product";
 
 const Header = () => {
 
@@ -30,6 +28,14 @@ const Header = () => {
     const [filteredSuggestions, setFilteredSuggestions] = useState([]);
     const inputRef = useRef(null);
 
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 3
+    };
+
 
     useEffect(() => {
         inputRef.current.focus();
@@ -48,6 +54,12 @@ const Header = () => {
             );
         }
     };
+
+    const handleNavigate = (id) => {
+        navigate(`/products/${id}`)
+        setSearchValue('')
+        setFilteredSuggestions('')
+    }
 
     const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
 
@@ -142,21 +154,26 @@ const Header = () => {
                     </div>
 
 
-                    {location.pathname !== '/products' && location.pathname !== '/favourites' && location.pathname !== '/basket' && filteredSuggestions.length > 0 && (
-                        <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-40 p-10">
-                            <div className="flex w-full">
+                    {location.pathname !== '/products' && location.pathname     !== '/favourites' && location.pathname !== '/basket' && filteredSuggestions.length > 0 && (
+                        <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-40 p-10 ">
+                            <div className="flex w-full overflow-x-auto overflow-y-auto">
                                 {filteredSuggestions.slice(0, 4).map((product, index) => (
-                                    <div
-                                        className="w-1/3 min-h-[200px] hover:cursor-pointer transition-transform duration-300 transform hover:scale-95"
-                                        key={index}
-                                    >
-                                        <div className="w-full h-[70%]">
-                                            <img src="/catalogImages/браслеты.png" alt="" className="py-5 px-5"/>
+
+                                        <div
+                                            className="w-1/3 min-h-[200px] hover:cursor-pointer transition-transform duration-300 transform hover:scale-95"
+                                            key={index}
+                                            onClick={() => handleNavigate(product.id)}
+                                        >
+                                            <div className="w-full h-[70%]">
+                                                <img src="/catalogImages/браслеты.png" alt="" className="py-5 px-5"/>
+                                            </div>
+                                            <div className="w-full h-[30%] flex flex-col mt-10">
+                                                <span className="font-bold text-sm">{product.name}</span>
+                                                <span className="font-bold text-sm mt-3">{product.price} тг</span>
+                                            </div>
                                         </div>
-                                        <div className="w-full h-[30%] flex items-center justify-center mt-5">
-                                            <span className="font-bold text-sm">{product.name}</span>
-                                        </div>
-                                    </div>
+
+
                                 ))}
                             </div>
                         </div>

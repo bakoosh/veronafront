@@ -6,7 +6,7 @@ const ProductHat = ({ isOpen, toggleDropdown, products }) => {
     return (
         <div className="w-full h-[100px] mt-5">
             <div className="w-full h-1/2 flex justify-between">
-                <div className="text-5xl mb-5 font-bold">{catalogName}</div>
+                <div className="text-5xl mb-5 font-bold">{catalogName ? catalogName: 'Все'}</div>
                 <div className="relative inline-block text-left">
                     <div>
                         <button
